@@ -1,8 +1,9 @@
-package com.example.mainverte
+package com.example.mainverte.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mainverte.R
 import java.util.*
 import kotlin.concurrent.schedule
 
