@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.mainverte.R
+import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.utils.Network
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         }
         buttonRefresh.setOnClickListener {
             verifInternet()
+        }
+        buttonBalise.setOnClickListener{
+            val intent: Intent = Intent(this@MainActivity, ListBalisesActivity::class.java)
+            startActivity(intent)
         }
     }
 

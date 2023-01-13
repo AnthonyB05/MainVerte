@@ -15,33 +15,33 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Favoris" />
+        android:text="@string/main_favoris" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMaps"
         android:layout_width="150dp"
         android:layout_margin="16dp"
         android:layout_height="wrap_content"
-        android:text="Carte" />
+        android:text="@string/main_carte" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonBalise"
         android:layout_width="150dp"
         android:layout_margin="16dp"
         android:layout_height="wrap_content"
-        android:text="Liste des balises" />
+        android:text="@string/main_liste_des_balises" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLocalisation"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Localisation" />
+        android:text="@string/main_localisation" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Refresh"
+        android:text="@string/main_refresh"
         android:visibility="gone"/>
 </LinearLayout>

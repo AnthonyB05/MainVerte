@@ -1,8 +1,12 @@
 package com.example.mainverte.activity
 
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mainverte.R
+import com.example.mainverte.databinding.ActivityMapsBinding
+import com.example.mainverte.listing.ListBalisesActivity
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,7 +14,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.mainverte.databinding.ActivityMapsBinding
+import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_maps.*
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -19,7 +25,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,6 +32,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.text!!.equals("Liste balises")) {
+                    val intent: Intent = Intent(this@MapsActivity, ListBalisesActivity::class.java);
+                    startActivity(intent);
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
     }
 
     /**
