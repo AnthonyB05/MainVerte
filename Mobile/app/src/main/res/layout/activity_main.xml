@@ -5,15 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity"
-    android:orientation="vertical">
+    android:gravity="center|center_horizontal"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:background="@drawable/champs">
 
-    <Button
-        android:id="@+id/buttonMaps"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonFav"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Maps" />
+        android:layout_margin="16dp"
+        android:text="Favoris" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMaps"
+        android:layout_width="150dp"
+        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:text="Carte" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonBalise"
+        android:layout_width="150dp"
+        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:text="Liste des balises" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonLocalisation"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Localisation" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
