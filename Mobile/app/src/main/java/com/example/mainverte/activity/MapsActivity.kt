@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.tabs.TabLayout
@@ -68,7 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         //current location
         if (this.currentLocation != null){
-            mMap.addMarker(MarkerOptions().position(this.currentLocation!!).title("Moi"))
+            mMap.addMarker(MarkerOptions().position(this.currentLocation!!).title("Moi").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation!!, 20F))
         }
     }
