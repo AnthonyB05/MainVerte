@@ -2,12 +2,11 @@ package com.example.mainverte.activity
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mainverte.R
 import com.example.mainverte.databinding.ActivityMapsBinding
 import com.example.mainverte.listing.ListBalisesActivity
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,6 +21,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private var currentLocation: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +33,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        val intent = intent
+        this.currentLocation = intent.getParcelableExtra<LatLng>("currentLocation")
+
+        // gestion des tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.text!!.equals("Liste balises")) {
@@ -62,8 +66,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //current location
+        if (this.currentLocation != null){
+            mMap.addMarker(MarkerOptions().position(this.currentLocation!!).title("Moi"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation!!, 20F))
+        }
     }
 }
