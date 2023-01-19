@@ -27,4 +27,8 @@ class ParameterRepository(private val parameterDao: ParameterDao) {
     fun getParameterByNameBalise(nameBalise: String) : LiveData<List<Parameter>>{
         return parameterDao.getParameterByNameBalise(nameBalise)
     }
+
+    fun getParameterByIdBalise(idBalise: Long) : LiveData<List<Parameter>>{
+        return parameterDao.getParameterByIdBalise(idBalise)
+    }
 }

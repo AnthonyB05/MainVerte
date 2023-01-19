@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "parameter", indices = [Index(value = ["nameBalise"], unique = true)])
 
 data class Parameter(
+    @ColumnInfo(name = "idBalise")
+    var idBalise: Long,
     @ColumnInfo(name = "nameBalise")
     var nameBalise: String,
     @ColumnInfo(name = "tempMin")

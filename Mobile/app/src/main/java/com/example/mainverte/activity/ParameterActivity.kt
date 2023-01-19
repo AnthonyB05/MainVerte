@@ -41,7 +41,7 @@ class ParameterActivity : AppCompatActivity() {
         if (this.balise != null) {
             textTitle.text = "Paramètres de " + this.balise!!.nameBalise
 
-            parameterViewModel.getParameterByNameBalise(balise!!.nameBalise!!)
+            parameterViewModel.getParameterByIdBalise(balise!!.id!!)
                 .observe(this) { parameter ->
                     if (parameter.isNullOrEmpty()){
                         defaultNumber()
@@ -72,7 +72,7 @@ class ParameterActivity : AppCompatActivity() {
     fun mappingToParameter(){
         defaultNumber()
         if (this.balise != null){
-            userParameter = Parameter(this.balise!!.nameBalise!!,Integer.parseInt(inputTempMin.getText().toString()), Integer.parseInt(inputTempMax.getText().toString()), Integer.parseInt(inputHumiditeMin.getText().toString()),
+            userParameter = Parameter(this.balise!!.id,this.balise!!.nameBalise!!,Integer.parseInt(inputTempMin.getText().toString()), Integer.parseInt(inputTempMax.getText().toString()), Integer.parseInt(inputHumiditeMin.getText().toString()),
                 Integer.parseInt(inputHumiditeMax.getText().toString()),switchTemp.isChecked, switchHumid.isChecked)
 
         }

@@ -29,6 +29,10 @@ class ParameterViewModel(private val repository: ParameterRepository) : ViewMode
         return repository.getParameterByNameBalise(baliseName)
     }
 
+    fun getParameterByIdBalise(idBalise: Long) : LiveData<List<Parameter>>{
+        return repository.getParameterByIdBalise(idBalise)
+    }
+
 }
 class ParameterViewModelFactory(private val repository: ParameterRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
