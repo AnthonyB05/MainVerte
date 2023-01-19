@@ -1,5 +1,6 @@
 package com.example.mainverte.models
 
 data class Balise(
-    val nom: String
+    val id: Long,
+    val nameBalise: String
 )

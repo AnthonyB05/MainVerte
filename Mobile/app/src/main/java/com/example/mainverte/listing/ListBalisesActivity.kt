@@ -12,8 +12,9 @@ class ListBalisesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_balises)
 
+        //TODO Récuperer liste bdd externe
         val listBalise: ArrayList<Balise> = ArrayList()
-        val balise = Balise("test")
+        val balise = Balise(1,"test")
         listBalise.add(balise)
         recyclerViewBalise.adapter = AdapterBalise(this, listBalise!!)
 

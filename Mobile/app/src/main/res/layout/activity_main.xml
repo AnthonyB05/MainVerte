@@ -39,6 +39,13 @@
         android:text="@string/main_localisation" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonParameter"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/main_parametre" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
