@@ -3,6 +3,7 @@ package com.example.mainverte.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
 import com.example.mainverte.MainVerteApplication
@@ -55,6 +56,7 @@ class ParameterActivity : AppCompatActivity() {
                 mappingToParameter()
                 if (userParameter != null){
                     parameterViewModel.insert(userParameter!!)
+                    Toast.makeText(this, "Enregistré avec succès", Toast.LENGTH_SHORT).show()
                 }
             }
         }
