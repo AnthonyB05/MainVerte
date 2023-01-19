@@ -17,6 +17,7 @@ class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     var executor: ExecutorService = Executors.newSingleThreadExecutor()
 
+
     private val nameBalise: TextView = itemView.findViewById(R.id.textViewNameBalise)
     val buttonSupp: ImageButton = itemView.findViewById(R.id.buttonSupp)
     val buttonMaps: ImageButton = itemView.findViewById(R.id.buttonMaps)
@@ -26,8 +27,7 @@ class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         nameBalise.text = baliseFav.nameBalise
         buttonSupp.setOnClickListener {
             executor.execute {
-                //TODO
-                //BaliseDataBase.getDatabase(itemView.context).baliseDao().delete(baliseFav)
+                BaliseDataBase.getDatabase(itemView.context).baliseDao().delete(baliseFav)
             }
         }
         buttonMaps.setOnClickListener {

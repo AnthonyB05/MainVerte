@@ -2,6 +2,7 @@ package com.example.mainverte.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,9 @@ class AdapterBalise(private val context: Context, private val list: ArrayList<Ba
         }
         holder.buttonInfo.setOnClickListener {
             val intent: Intent = Intent(context, InfoBaliseActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("balise", item)
+            intent.putExtras(bundle)
             context.startActivity(intent)
         }
     }

@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         verifInternet()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation();
+
         buttonMaps.setOnClickListener {
             val intentMaps: Intent = Intent(this@MainActivity, MapsActivity::class.java);
             if (this.currentLocation != null){
