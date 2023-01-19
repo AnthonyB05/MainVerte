@@ -19,6 +19,7 @@
             android:maxWidth="282dp"
             android:minWidth="282dp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             tools:text="Balise 1" />
 
 

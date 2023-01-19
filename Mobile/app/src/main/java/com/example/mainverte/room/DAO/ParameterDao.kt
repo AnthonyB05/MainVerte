@@ -9,10 +9,12 @@ interface ParameterDao {
     @Query("SELECT * FROM parameter")
     fun getAll(): LiveData<List<Parameter>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(parameter: Parameter)
 
     @Query("DELETE FROM parameter")
     suspend fun deleteAll()
 
+    @Query("SELECT * FROM parameter WHERE nameBalise LIKE :nameBalise")
+    fun getParameterByNameBalise(nameBalise: String) : LiveData<List<Parameter>>
 }

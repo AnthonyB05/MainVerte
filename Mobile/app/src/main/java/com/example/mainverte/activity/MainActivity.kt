@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import com.example.mainverte.R
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.listing.ListBalisesFavActivity
+import com.example.mainverte.listing.ListBalisesParameterActivity
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         buttonParameter.setOnClickListener {
-            val intent: Intent = Intent(this@MainActivity, ParameterActivity::class.java)
+            val intent: Intent = Intent(this@MainActivity, ListBalisesParameterActivity::class.java)
             startActivity(intent)
         }
         buttonFav.setOnClickListener {

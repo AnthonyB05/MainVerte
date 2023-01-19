@@ -25,6 +25,7 @@
             android:layout_gravity="center_vertical"
             android:maxWidth="282dp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             tools:text="Balise 1" />
 
         <LinearLayout

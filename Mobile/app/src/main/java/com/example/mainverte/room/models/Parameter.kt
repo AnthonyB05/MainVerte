@@ -6,9 +6,11 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "parameter")
+@Entity(tableName = "parameter", indices = [Index(value = ["nameBalise"], unique = true)])
 
 data class Parameter(
+    @ColumnInfo(name = "nameBalise")
+    var nameBalise: String,
     @ColumnInfo(name = "tempMin")
     val tempMin: Int,
     @ColumnInfo(name = "tempMax")
