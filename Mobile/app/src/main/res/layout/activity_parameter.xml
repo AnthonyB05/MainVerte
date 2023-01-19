@@ -12,142 +12,130 @@
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
         android:text="Paramètres"
+        style="@style/Title"
         android:textColor="#3C3131"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_margin="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notifications :"
+            />
+
+        <Switch
+            android:id="@+id/switchTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Etat de la température" />
+
+        <Switch
+            android:id="@+id/switchHumid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Etat de l'humidité" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:id="@+id/TempMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
                 android:text="Température min : " />
 
             <EditText
                 android:id="@+id/inputTempmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="0dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/TempMax"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
                 android:text="Température max : " />
 
             <EditText
                 android:id="@+id/inputTempMax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="0dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/HumiditeMin"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
                 android:text="Humidité min         : " />
 
             <EditText
                 android:id="@+id/inputHumiditeMin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="0dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/HumiditeMax"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
                 android:text="Humidité max        : " />
 
             <EditText
                 android:id="@+id/inputHumiditeMax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text="" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/notification"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notifications"
-            android:layout_margin="16dp" />
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="8dp"
-            android:text="Balises en favoris" />
-        <Switch
-            android:id="@+id/switch2"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="8dp"
-            android:text="Etat de la température" />
-        <Switch
-            android:id="@+id/switch3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="8dp"
-            android:text="Etat de l'humidité" />
+            android:text="Enregistrer" />
     </LinearLayout>
 
 </LinearLayout>

@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainverte.R
-import com.example.mainverte.room.BaliseDataBase
+import com.example.mainverte.room.MainVerteDataBase
 import com.example.mainverte.room.models.BaliseFav
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -27,7 +27,7 @@ class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         nameBalise.text = baliseFav.nameBalise
         buttonSupp.setOnClickListener {
             executor.execute {
-                BaliseDataBase.getDatabase(itemView.context).baliseDao().delete(baliseFav)
+                MainVerteDataBase.getDatabase(itemView.context).baliseDao().delete(baliseFav)
             }
         }
         buttonMaps.setOnClickListener {
