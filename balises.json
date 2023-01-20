@@ -1,0 +1,26 @@
+[
+    {
+        "idBalise": 1,
+        "name": "capteurIci"
+    },
+    {
+        "idBalise": 2,
+        "name": "LeaAcheteDesSkins"
+    },
+    {
+        "idBalise": 3,
+        "name": "JesuisUneBalise"
+    },
+    {
+        "idBalise": 4,
+        "name": "OulaCaCapteDeFou"
+    },
+    {
+        "idBalise": 5,
+        "name": "Wow"
+    },
+    {
+        "idBalise": 6,
+        "name": "JesuisUnChat"
+    }
+]

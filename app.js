@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
-const sensorsRoute = require("./api_test/routes/sensors");
-const sensorsDataRoute = require("./api_test/routes/data_sensors");
+const balisesRoute = require("./api_test/routes/balises");
+const baliseDataRoute = require("./api_test/routes/balises-data");
 
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 
 //Middlewareapp.use(express.json())
 /*app.get('/sensors', (req,res) => {    res.status(200).json(sensors)})
@@ -13,8 +13,8 @@ const sensor = sensors.find(sensor => sensor.id == id)
 res.status(200).json(sensor)})
 app.post('/sensors', (req,res) => {  sensors.push(req.body)  
 res.status(200).json(sensors)})*/
-app.use('/sensors',sensorsRoute);
-app.use('/data_sensors',sensorsDataRoute);
+app.use('/balises',balisesRoute);
+app.use('/balises-data',baliseDataRoute);
 app.use((req,res,next)=>{
     res.status(200).json({
         message:'app is running'

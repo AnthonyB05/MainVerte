@@ -1,0 +1,7 @@
+const express = require('express')
+const router = express.Router();
+const balises = require('../../balises.json')
+
+router.get('/', (req,res,next) => {    res.status(200).json(balises)})
+
+module.exports = router;

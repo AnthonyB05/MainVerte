@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const sensors = require('../../sensors.json')
+const sensors = require('./sensors.json')
 const mongoose = require("mongoose");
 
 //Middlewareapp.use(express.json())
