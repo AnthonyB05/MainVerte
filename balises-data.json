@@ -6,7 +6,7 @@
         "humiditeExt" : 32.2,
         "luminosite" : 140.1,
         "longitude" : 23.26568,
-        "lattitude": 88.09136,
+        "latitude": 88.09136,
         "date" : "2023-05-12"
     },
     {
@@ -16,7 +16,7 @@
         "humiditeExt" : 42.2,
         "luminosite" : 55.1,
         "longitude" : 73.26568,
-        "lattitude": 8.09136,
+        "latitude": 8.09136,
         "date" : "2022-08-12"
     },
     {
@@ -26,7 +26,7 @@
         "humiditeExt" : 12.2,
         "luminosite" : 42.1,
         "longitude" : 13.26568,
-        "lattitude": -13.09136,
+        "latitude": -13.09136,
         "date" : "2023-01-26"
     },
     {
@@ -36,7 +36,7 @@
         "humiditeExt" : 21.1,
         "luminosite" : 105,
         "longitude" : -3.26568,
-        "lattitude": 35.09136,
+        "latitude": 35.09136,
         "date" : "2022-12-31"
     },
     {
@@ -46,7 +46,7 @@
         "humiditeExt" : 11.5,
         "luminosite" : 144.1,
         "longitude" : 48.84595,
-        "lattitude": -48.45136,
+        "latitude": -48.45136,
         "date" : "2023-01-04"
     },
     {
@@ -56,7 +56,7 @@
         "humiditeExt" : 100,
         "luminosite" : 15.3,
         "longitude" : 11.54548,
-        "lattitude": -99.09136,
+        "latitude": -99.09136,
         "date" : "2023-03-03"
     }
 ]
