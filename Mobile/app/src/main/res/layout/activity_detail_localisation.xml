@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DetailLocalisationActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="333dp"
-        android:layout_height="38dp"
-        android:text="Cette option permet d'initialiser la localisation d'une balise. Tenez vous proche de la balise et cliquez sur le bouton suivant :"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+    tools:context=".activity.DetailLocalisationActivity"
+    android:padding="16dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewNameBalise"
-        android:layout_width="230dp"
-        android:layout_height="40dp"
-        android:layout_margin="16dp"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="NameBalise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        android:layout_margin="16dp"
+        style="@style/Title"
+        android:gravity="center"/>
 
-    <Button
-        android:id="@+id/button2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Localisation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.165" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cette option permet d'initialiser la localisation d'une balise. Tenez vous proche de la balise et cliquez sur le bouton suivant :"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLocaliser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Localiser"
+            android:layout_marginTop="50dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

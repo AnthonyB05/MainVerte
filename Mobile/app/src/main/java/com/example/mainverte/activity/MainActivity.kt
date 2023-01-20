@@ -29,6 +29,7 @@ import com.example.mainverte.listing.ListBalisesParameterActivity
 import com.example.mainverte.listing.ListLocalisationActivity
 import com.example.mainverte.models.Balise
 import com.example.mainverte.models.Data
+import com.example.mainverte.utils.Constant
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -106,8 +107,36 @@ class MainActivity : AppCompatActivity() {
         }
         buttonLocalisation.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListLocalisationActivity::class.java)
+            if (this.apiListBalises != null){
+                val bundle = Bundle()
+                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
+                intent.putExtras(bundle)
+            }
             startActivity(intent)
         }
+    }
+
+    private  fun requestVolleyBalises(): Unit {
+        //requête HTTP avec Volley
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = Constant.URL_API_BALISES
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { json ->
+                Log.i("JSON", "succès: $json")
+                val temp = Gson().fromJson(json, Array<Balise>::class.java)
+                this.apiListBalises = temp.toCollection(ArrayList())
+            },
+            Response.ErrorListener { error ->
+                val json = String(error.networkResponse.data)
+                Log.i("JSON", "erreur: $json")
+            })
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest)
     }
 
     private fun getCurrentLocation(){
@@ -215,7 +244,7 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             visibleRefreshButton(true)
-
+            requestVolleyBalises()
         }
     }
 

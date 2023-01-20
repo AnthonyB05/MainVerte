@@ -11,12 +11,16 @@ import kotlinx.android.synthetic.main.activity_list_balises.*
 import kotlinx.android.synthetic.main.activity_localisation.*
 
 class ListLocalisationActivity : AppCompatActivity() {
+
+    private var apiListBalises: ArrayList<Balise>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_localisation)
-        val listBalise: ArrayList<Balise> = ArrayList()
-        val balise = Balise(1, "test")
-        listBalise.add(balise)
-        recyclerViewBaliseLocalisation.adapter = AdapterBaliseLocalisation(this, listBalise!!)
+        val intent = intent
+        this.apiListBalises = intent.getParcelableArrayListExtra("apiListBalises")
+        if (this.apiListBalises != null){
+            recyclerViewBaliseLocalisation.adapter = AdapterBaliseLocalisation(this, this.apiListBalises!!)
+        }
     }
 }

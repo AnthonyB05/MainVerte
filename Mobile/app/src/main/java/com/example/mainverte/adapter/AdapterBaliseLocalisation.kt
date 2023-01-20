@@ -34,7 +34,7 @@ class AdapterBaliseLocalisation(private val context: Context, private val list:A
 
     override fun onBindViewHolder(holder: AdapterBaliseLocalisation.ViewHolder, position: Int) {
         val item = list[position]
-        holder.textViewNameBaliseLocalisation.setText(item.nameBalise)
+        holder.textViewNameBaliseLocalisation.setText(item.name)
         holder.buttonMaps.setOnClickListener {
             val intent: Intent = Intent(context, DetailLocalisationActivity::class.java)
             val bundle = Bundle()
