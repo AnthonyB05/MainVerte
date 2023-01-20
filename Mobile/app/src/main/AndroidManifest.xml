@@ -17,7 +17,7 @@
         android:theme="@style/Theme.MainVerte"
         tools:targetApi="31">
         <activity
-            android:name=".LocalisationActivity"
+            android:name=".listing.LocalisationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
