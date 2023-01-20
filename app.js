@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 const sensorsRoute = require("./api_test/routes/sensors");
 const sensorsDataRoute = require("./api_test/routes/data_sensors");
 
@@ -13,14 +13,17 @@ const sensor = sensors.find(sensor => sensor.id == id)
 res.status(200).json(sensor)})
 app.post('/sensors', (req,res) => {  sensors.push(req.body)  
 res.status(200).json(sensors)})*/
-app.use('/sensors',sensorsRoute);
-app.use('/data_sensors',sensorsDataRoute);
-app.use((req,res,next)=>{
-    res.status(200).json({
-        message:'app is running'
-    })
-})
+app.use("/sensors", sensorsRoute);
+app.use("/data_sensors", sensorsDataRoute);
+app.use((req, res, next) => {
+  res.status(200).json({
+    message: "app is running",
+  });
+});
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 module.exports = app;
 /*mongoose.set("strictQuery", true);
@@ -43,4 +46,3 @@ const fruitSchema = new mongoose.Schema({
   });
   
   fruit.save();*/
-
