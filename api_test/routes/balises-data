@@ -4,7 +4,7 @@ const baliseJson = require('../../balises-data.json');
 const baliseData = require('../model/balise-data');
 const mongoose = require('mongoose');
 router.get('/', (req,res,next) => {  
-    baliseData.find()
+    baliseData.find().sort({date:-1})
     .then(result=>{
        res.status(200).json({
            balisesData:result
@@ -40,7 +40,7 @@ router.post('/',(req,res,next)=>{
 
  router.get('/:id',(req,res,next) => { 
     console.log(req.params.id)
-    baliseData.find({id: req.params.id})
+    baliseData.find({id: req.params.id}).sort({date: -1})
     .then(result=>{
         res.status(200).json({
             balise:result
