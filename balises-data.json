@@ -2,9 +2,9 @@
     {
         "id": 155,
         "idBalise": 1,
-        "degréCelsius": 45.5,
-        "humiditéExt" : 32.2,
-        "luminosité" : 140.1,
+        "degreCelsius": 45.5,
+        "humiditeExt" : 32.2,
+        "luminosite" : 140.1,
         "longitude" : 23.26568,
         "lattitude": 88.09136,
         "date" : "2023-05-12"
@@ -12,9 +12,9 @@
     {
         "id": 4554,
         "idBalise": 2,
-        "degréCelsius": 2.5,
-        "humiditéExt" : 42.2,
-        "luminosité" : 55.1,
+        "degreCelsius": 2.5,
+        "humiditeExt" : 42.2,
+        "luminosite" : 55.1,
         "longitude" : 73.26568,
         "lattitude": 8.09136,
         "date" : "2022-08-12"
@@ -22,9 +22,9 @@
     {
         "id": 454541,
         "idBalise": 3,
-        "degréCelsius": -45.5,
-        "humiditéExt" : 12.2,
-        "luminosité" : 42.1,
+        "degreCelsius": -45.5,
+        "humiditeExt" : 12.2,
+        "luminosite" : 42.1,
         "longitude" : 13.26568,
         "lattitude": -13.09136,
         "date" : "2023-01-26"
@@ -32,9 +32,9 @@
     {
         "id": 69,
         "idBalise": 4,
-        "degréCelsius": 5,
-        "humiditéExt" : 21.1,
-        "luminosité" : 105,
+        "degreCelsius": 5,
+        "humiditeExt" : 21.1,
+        "luminosite" : 105,
         "longitude" : -3.26568,
         "lattitude": 35.09136,
         "date" : "2022-12-31"
@@ -42,9 +42,9 @@
     {
         "id": 6969,
         "idBalise": 5,
-        "degréCelsius": -14,
-        "humiditéExt" : 11.5,
-        "luminosité" : 144.1,
+        "degreCelsius": -14,
+        "humiditeExt" : 11.5,
+        "luminosite" : 144.1,
         "longitude" : 48.84595,
         "lattitude": -48.45136,
         "date" : "2023-01-04"
@@ -52,9 +52,9 @@
     {
         "id": 7575,
         "idBalise": 6,
-        "degréCelsius": 11.5,
-        "humiditéExt" : 100,
-        "luminosité" : 15.3,
+        "degreCelsius": 11.5,
+        "humiditeExt" : 100,
+        "luminosite" : 15.3,
         "longitude" : 11.54548,
         "lattitude": -99.09136,
         "date" : "2023-03-03"
