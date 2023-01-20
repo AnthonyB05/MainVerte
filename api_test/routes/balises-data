@@ -1,7 +1,56 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const balise_data = require('../../balises-data.json')
+const baliseJson = require('../../balises-data.json');
+const baliseData = require('../model/balise-data');
+const mongoose = require('mongoose');
+router.get('/', (req,res,next) => {  
+    baliseData.find()
+    .then(result=>{
+       res.status(200).json({
+           balisesData:result
+       }
 
-router.get('/', (req,res,next) => {    res.status(200).json(balise_data)})
+       )
+    })})
 
+router.post('/',(req,res,next)=>{
+    const uneBaliseData = new baliseData({
+        idBalise: req.body.idBalise,
+        degreCelsius:req.body.degreCelsius,
+        humiditeExt: req.body.humiditeExt,
+        luminosite: req.body.luminosite,
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
+       
+    })
+    uneBaliseData.save()
+   .then(result=>{
+    console.log(result);
+    res.status(200).json({
+        newBalise:result
+    })
+   })
+   .catch(err=>{
+    console.log(err);
+    res.status(500).json({
+        error:err
+    });
+   })
+ })
+
+ router.get('/:id',(req,res,next) => { 
+    console.log(req.params.id)
+    baliseData.find({id: req.params.id})
+    .then(result=>{
+        res.status(200).json({
+            balise:result
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    })
+})
 module.exports = router;

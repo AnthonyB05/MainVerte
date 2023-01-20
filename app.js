@@ -2,47 +2,38 @@ const express = require('express')
 const app = express()
 const balisesRoute = require("./api_test/routes/balises");
 const baliseDataRoute = require("./api_test/routes/balises-data");
+const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 
-//const mongoose = require("mongoose");
 
-//Middlewareapp.use(express.json())
-/*app.get('/sensors', (req,res) => {    res.status(200).json(sensors)})
-app.get('/sensors/:id', (req,res) => {    const id = (req.params.id)
-console.log(typeof(id));
-const sensor = sensors.find(sensor => sensor.id == id) 
-res.status(200).json(sensor)})
-app.post('/sensors', (req,res) => {  sensors.push(req.body)  
-res.status(200).json(sensors)})*/
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
 app.use('/balises',balisesRoute);
 app.use('/balises-data',baliseDataRoute);
+app.use('/balise/:id',balisesRoute)
 app.use((req,res,next)=>{
     res.status(200).json({
         message:'app is running'
     })
 })
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
 
 module.exports = app;
-/*mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://localhost:27017/laerte", {
-  useNewUrlParser: false,
+////////////////////////////////// Connexion BDD //////////////////////////////////
+mongoose.connect("mongodb+srv://root:root@lamainverte.eit2nfv.mongodb.net/LaMainVerte?retryWrites=true&w=majority", {
+  useNewUrlParser: false
+  
  // useUnifiedTopology: true
 });
-const fruitSchema = new mongoose.Schema({
-    name: String,
-    rating: Number,
-    review: String
-  });
-  
-  const Fruit = mongoose.model("Fruit", fruitSchema);
-  
-  const fruit = new Fruit({
-      name: "Apple",
-      rating: 7,
-      review: "Taste Good"
-  });
-  
-  fruit.save();*/
+const database = mongoose.connection;
+database.on('error',err=>{
+    console.log("connexion failed");
+
+});
+mongoose.connection.on('connected',connected=>{
+    console.log('connected with db...')
+});
+
+///////////////////////////////////////////////////////////////////////////////////
