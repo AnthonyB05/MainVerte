@@ -7,8 +7,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.media.audiofx.Equalizer.Settings
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,14 +17,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.mainverte.R
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.listing.ListBalisesFavActivity
 import com.example.mainverte.listing.ListBalisesParameterActivity
+import com.example.mainverte.models.Balise
+import com.example.mainverte.models.Data
+import com.example.mainverte.utils.Constant
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -31,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var currentLocation: LatLng? = null
+    private var apiListBalises: ArrayList<Balise>? = null
+    private var apiListBalisesData: ArrayList<Data>? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -54,9 +65,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         verifInternet()
+        //récupération de la localisation
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation();
-
+        // gestion des boutons
         buttonMaps.setOnClickListener {
             val intentMaps: Intent = Intent(this@MainActivity, MapsActivity::class.java);
             if (this.currentLocation != null){
@@ -64,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                 bundle.putParcelable("currentLocation", this.currentLocation)
                 intentMaps.putExtras(bundle)
             }
+
             startActivity(intentMaps);
         }
         buttonRefresh.setOnClickListener {
@@ -71,10 +84,20 @@ class MainActivity : AppCompatActivity() {
         }
         buttonBalise.setOnClickListener{
             val intent: Intent = Intent(this@MainActivity, ListBalisesActivity::class.java)
+            if (this.apiListBalises != null){
+                val bundle = Bundle()
+                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
+                intent.putExtras(bundle)
+            }
             startActivity(intent)
         }
         buttonParameter.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListBalisesParameterActivity::class.java)
+            if (this.apiListBalises != null){
+                val bundle = Bundle()
+                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
+                intent.putExtras(bundle)
+            }
             startActivity(intent)
         }
         buttonFav.setOnClickListener {
@@ -83,10 +106,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private  fun requestVolleyBalises(): Unit {
+        //requête HTTP avec Volley
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = Constant.URL_API_BALISES
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { json ->
+                Log.i("JSON", "succès: $json")
+                val temp = Gson().fromJson(json, Array<Balise>::class.java)
+                this.apiListBalises = temp.toCollection(ArrayList())
+            },
+            Response.ErrorListener { error ->
+                val json = String(error.networkResponse.data)
+                Log.i("JSON", "erreur: $json")
+            })
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest)
+    }
+
+
     private fun getCurrentLocation(){
         if (checkPermissions()){
             if (isLocationEnabled()){
-                // final longitude et latitude ici
                 if (ActivityCompat.checkSelfPermission(
                         this,
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -188,7 +234,7 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             visibleRefreshButton(true)
-
+            requestVolleyBalises()
         }
     }
 

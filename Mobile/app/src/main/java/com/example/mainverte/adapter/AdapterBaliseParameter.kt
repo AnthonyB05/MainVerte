@@ -29,7 +29,7 @@ class AdapterBaliseParameter(private val context: Context, private val list: Arr
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        holder.textViewNameBalise.setText(item.nameBalise)
+        holder.textViewNameBalise.setText(item.name)
         holder.itemView.setOnClickListener {
             val intent: Intent = Intent(context, ParameterActivity::class.java)
             val bundle = Bundle()

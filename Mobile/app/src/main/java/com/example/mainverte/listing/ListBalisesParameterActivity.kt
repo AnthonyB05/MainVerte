@@ -10,15 +10,16 @@ import kotlinx.android.synthetic.main.activity_list_balises.*
 import kotlinx.android.synthetic.main.activity_list_balises_parameter.*
 
 class ListBalisesParameterActivity : AppCompatActivity() {
+
+    private var apiListBalises: ArrayList<Balise>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_balises_parameter)
-        val listBalise: ArrayList<Balise> = ArrayList()
-        val balise = Balise(1,"test")
-        val balise2 = Balise(2,"test2")
-        listBalise.add(balise)
-        listBalise.add(balise2)
-        recyclerViewParameter.adapter = AdapterBaliseParameter(this, listBalise!!)
-
+        val intent = intent
+        this.apiListBalises = intent.getParcelableArrayListExtra("apiListBalises")
+        if (this.apiListBalises != null){
+            recyclerViewParameter.adapter = AdapterBaliseParameter(this, this.apiListBalises!!)
+        }
     }
 }

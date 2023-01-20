@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mainverte.R
 import com.example.mainverte.databinding.ActivityMapsBinding
 import com.example.mainverte.listing.ListBalisesActivity
+import com.example.mainverte.models.Balise
+import com.example.mainverte.models.Data
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,6 +25,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private var currentLocation: LatLng? = null
+    private var apiListBalises: ArrayList<Balise>? = null
+    private var apiListBalisesData: ArrayList<Data>? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val intent = intent
         this.currentLocation = intent.getParcelableExtra<LatLng>("currentLocation")
-
         // gestion des tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

@@ -27,18 +27,18 @@ class InfoBaliseActivity : AppCompatActivity() {
         val intent = intent
         this.balise = intent.getParcelableExtra("balise")
         if (balise != null){
-            textViewNameBalise.text = balise!!.nameBalise
+            textViewNameBalise.text = balise!!.name
             // action button
             imageButtonFavoris.setOnClickListener {
                 val builder = AlertDialog.Builder(this)
                 //set title for alert dialog
                 builder.setTitle(getString(R.string.attention))
                 //set message for alert dialog
-                builder.setMessage(getString(R.string.ajout_en_favoris, this.balise!!.nameBalise))
+                builder.setMessage(getString(R.string.ajout_en_favoris, this.balise!!.name))
 
                 //performing positive action
                 builder.setPositiveButton(R.string.oui) { dialogInterface, which ->
-                    val tempFav = BaliseFav(this.balise!!.nameBalise!!)
+                    val tempFav = BaliseFav(this.balise!!.name!!)
                     baliseViewModel.insert(tempFav)
                 }
 
