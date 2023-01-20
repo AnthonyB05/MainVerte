@@ -20,6 +20,7 @@ import com.example.mainverte.R
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.listing.ListBalisesFavActivity
 import com.example.mainverte.listing.ListBalisesParameterActivity
+import com.example.mainverte.listing.ListLocalisationActivity
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -79,6 +80,10 @@ class MainActivity : AppCompatActivity() {
         }
         buttonFav.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListBalisesFavActivity::class.java)
+            startActivity(intent)
+        }
+        buttonLocalisation.setOnClickListener {
+            val intent: Intent = Intent(this@MainActivity, ListLocalisationActivity::class.java)
             startActivity(intent)
         }
     }

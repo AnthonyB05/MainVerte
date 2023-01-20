@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".listing.LocalisationActivity">
+    tools:context=".listing.ListLocalisationActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBaliseLocalisation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
