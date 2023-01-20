@@ -12,6 +12,7 @@ res.status(200).json(sensor)})
 app.post('/sensors', (req,res) => {  sensors.push(req.body)  
 res.status(200).json(sensors)})*/
 app.use('/sensors',sensorsRoute);
+app.use('/data_sensors',sensorsRoute);
 app.use((req,res,next)=>{
     res.status(200).json({
         message:'app is running'

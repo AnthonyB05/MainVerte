@@ -1,1 +1,1 @@
-[{"id":1,"name":"John", "age":30, "car":null},{"id":2,"name":"John", "age":30, "car":null}]
+[{"idBalise":1,"name":"humidite"},{"idBalise":2,"name":"luminosité"},{"idBalise":3,"name":"luminosité"},{"idBalise":4,"name":"temperature"},{"idBalise":5,"name":"gps"},{"idBalise":6,"name":"gps"}]
