@@ -1,11 +1,26 @@
 <resources>
+
     <string name="app_name">MainVerte</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <!-- MainActivity !-->
     <string name="main_favoris">Favoris</string>
     <string name="main_carte">Carte</string>
     <string name="main_liste_des_balises">Liste des balises</string>
     <string name="main_localisation">Localisation</string>
     <string name="main_refresh">Refresh</string>
+    <string name="main_parametre">Paramètres</string>
+
+    <!-- MapActivity !-->
     <string name="map_carte">Carte</string>
     <string name="map_liste_balises">Liste balises</string>
+
+    <!-- FavActivity !-->
+    <string name="fav_les_favoris">Les favoris</string>
+
+    <!-- FastDialog !-->
+    <string name="attention">Attention</string>
+    <string name="ajout_en_favoris">"Voulez-vous ajouter '%s' en favoris"</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
 </resources>

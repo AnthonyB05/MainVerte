@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.mainverte.R
 import com.example.mainverte.listing.ListBalisesActivity
+import com.example.mainverte.listing.ListBalisesFavActivity
+import com.example.mainverte.listing.ListBalisesParameterActivity
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         verifInternet()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation();
+
         buttonMaps.setOnClickListener {
             val intentMaps: Intent = Intent(this@MainActivity, MapsActivity::class.java);
             if (this.currentLocation != null){
@@ -70,7 +73,14 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@MainActivity, ListBalisesActivity::class.java)
             startActivity(intent)
         }
-
+        buttonParameter.setOnClickListener {
+            val intent: Intent = Intent(this@MainActivity, ListBalisesParameterActivity::class.java)
+            startActivity(intent)
+        }
+        buttonFav.setOnClickListener {
+            val intent: Intent = Intent(this@MainActivity, ListBalisesFavActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getCurrentLocation(){
@@ -190,6 +200,7 @@ class MainActivity : AppCompatActivity() {
             buttonFav.visibility = View.VISIBLE;
             buttonBalise.visibility = View.VISIBLE
             buttonLocalisation.visibility = View.VISIBLE
+            buttonParameter.visibility = View.VISIBLE
             buttonRefresh.visibility = View.GONE
         }
         else{
@@ -197,6 +208,7 @@ class MainActivity : AppCompatActivity() {
             buttonFav.visibility = View.GONE;
             buttonBalise.visibility = View.GONE
             buttonLocalisation.visibility = View.GONE
+            buttonParameter.visibility = View.GONE
             buttonRefresh.visibility = View.VISIBLE
         }
     }
