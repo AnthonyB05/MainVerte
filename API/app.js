@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const sensorsRoute = require("./api/routes/sensors");
+const sensorsRoute = require("./api_test/routes/sensors");
 const mongoose = require("mongoose");
 
 //Middlewareapp.use(express.json())
