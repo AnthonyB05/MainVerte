@@ -21,6 +21,9 @@ app.use((req,res,next)=>{
     })
 })
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 module.exports = app;
 /*mongoose.set("strictQuery", true);
@@ -43,4 +46,3 @@ const fruitSchema = new mongoose.Schema({
   });
   
   fruit.save();*/
-
