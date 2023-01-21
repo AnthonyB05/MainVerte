@@ -40,7 +40,7 @@ router.post('/',(req,res,next)=>{
 
  router.get('/:id',(req,res,next) => { 
     console.log(req.params.id)
-    baliseData.find({id: req.params.id}).sort({date: -1})
+    baliseData.find({idBalise: req.params.id}).sort({date: -1})
     .then(result=>{
         res.status(200).json({
             balise:result
