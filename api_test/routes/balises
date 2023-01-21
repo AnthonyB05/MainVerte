@@ -31,7 +31,7 @@ router.get('/:id',(req,res,next) => {
        
 router.post('/',(req,res,next)=>{
    const uneBalise = new Balise({
-    id: req.body._id,
+    id: req.body.id,
     nameBalise: req.body.nameBalise
    })
    console.log(req.body)
