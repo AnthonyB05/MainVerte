@@ -43,7 +43,7 @@ router.post('/',(req,res,next)=>{
     baliseData.find({idBalise: req.params.id}).sort({date: -1})
     .then(result=>{
         res.status(200).json({
-            balise:result
+            baliseData:result
         })
     })
     .catch(err=>{
@@ -58,7 +58,7 @@ router.get('/:id/last',(req,res,next) => {
     baliseData.findOne({idBalise: req.params.id}).sort({date: -1})
     .then(result=>{
         res.status(200).json({
-            balise:result
+            baliseData:result
         })
     })
     .catch(err=>{
