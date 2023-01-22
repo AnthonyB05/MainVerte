@@ -31,7 +31,7 @@ class ListLocalisationActivity : AppCompatActivity() {
         data.enqueue(object : Callback<ListBalises> {
             override fun onResponse(call: Call<ListBalises>, response: Response<ListBalises>) {
                 if (response.isSuccessful){
-                    recyclerViewBaliseLocalisation.adapter = AdapterBalise(this@ListLocalisationActivity, response.body()!!.balises!!)
+                    recyclerViewBaliseLocalisation.adapter = AdapterBaliseLocalisation(this@ListLocalisationActivity, response.body()!!.balises!!, currentLocation)
                 }
             }
             override fun onFailure(call: Call<ListBalises>, t: Throwable) {
