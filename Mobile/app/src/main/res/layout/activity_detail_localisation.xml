@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,14 +25,13 @@
         android:layout_marginTop="30dp">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cette option permet d'initialiser la localisation d'une balise. Tenez vous proche de la balise et cliquez sur le bouton suivant :"
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonLocaliser"
+            android:id="@+id/buttonLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Localiser"

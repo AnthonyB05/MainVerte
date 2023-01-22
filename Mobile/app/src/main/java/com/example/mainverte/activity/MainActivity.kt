@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var currentLocation: LatLng? = null
-    private var apiListBalises: ArrayList<Balise>? = null
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -90,11 +89,6 @@ class MainActivity : AppCompatActivity() {
                 bundle.putParcelable("currentLocation", this.currentLocation)
                 intentMaps.putExtras(bundle)
             }
-            if (this.apiListBalises != null) {
-                val bundle = Bundle()
-                bundle.putParcelableArrayList("apiListbalises", this.apiListBalises)
-                intentMaps.putExtras(bundle)
-            }
             startActivity(intentMaps);
         }
         buttonRefresh.setOnClickListener {
@@ -102,20 +96,10 @@ class MainActivity : AppCompatActivity() {
         }
         buttonBalise.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListBalisesActivity::class.java)
-            if (this.apiListBalises != null) {
-                val bundle = Bundle()
-                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
-                intent.putExtras(bundle)
-            }
             startActivity(intent)
         }
         buttonParameter.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListBalisesParameterActivity::class.java)
-            if (this.apiListBalises != null) {
-                val bundle = Bundle()
-                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
-                intent.putExtras(bundle)
-            }
             startActivity(intent)
         }
         buttonFav.setOnClickListener {
@@ -124,35 +108,13 @@ class MainActivity : AppCompatActivity() {
         }
         buttonLocalisation.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListLocalisationActivity::class.java)
-            if (this.apiListBalises != null) {
+            if (this.currentLocation != null){
                 val bundle = Bundle()
-                bundle.putParcelableArrayList("apiListBalises", this.apiListBalises)
+                bundle.putParcelable("currentLocation", this.currentLocation)
                 intent.putExtras(bundle)
             }
             startActivity(intent)
         }
-    }
-
-    private fun getCurrentBalise() {
-
-        var data = Api.apiService.getBalises()
-        data.enqueue(object : Callback<ListBalises>{
-            override fun onResponse(
-                call: Call<ListBalises>,
-                response: retrofit2.Response<ListBalises>
-            ) {
-                if (response.code().equals(200)){
-                    var temp = response.body()
-                    apiListBalises = temp!!.balises
-                }
-            }
-
-            override fun onFailure(call: Call<ListBalises>, t: Throwable) {
-                Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
     }
 
     private fun getCurrentLocation() {
@@ -236,10 +198,10 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_ACCESS_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(applicationContext, "Granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show()
                 getCurrentLocation()
             } else {
-                Toast.makeText(applicationContext, "Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -263,7 +225,6 @@ class MainActivity : AppCompatActivity() {
             visibleRefreshButton(false)
         } else {
             visibleRefreshButton(true)
-            getCurrentBalise()
         }
     }
 

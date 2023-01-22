@@ -10,8 +10,8 @@ data class BalisesData(
     val degreCelsius: Double,
     val humiditeExt: Double,
     val luminosite: Double,
-    val longitude: Double,
-    val latitude: Double,
+    var longitude: Double,
+    var latitude: Double,
     val date: Date
 ): Parcelable {
     constructor(parcel: Parcel) : this(

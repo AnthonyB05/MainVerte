@@ -16,8 +16,12 @@ import com.example.mainverte.activity.DetailLocalisationActivity
 import com.example.mainverte.activity.InfoBaliseActivity
 import com.example.mainverte.activity.ParameterActivity
 import com.example.mainverte.models.Balise
+import com.google.android.gms.maps.model.LatLng
 
-class AdapterBaliseLocalisation(private val context: Context, private val list:ArrayList<Balise>) : RecyclerView.Adapter<AdapterBaliseLocalisation.ViewHolder>() {
+class AdapterBaliseLocalisation(private val context: Context, private val list:ArrayList<Balise>, currentLocation: LatLng?) : RecyclerView.Adapter<AdapterBaliseLocalisation.ViewHolder>() {
+
+    private var currentLocation: LatLng? = currentLocation
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewNameBaliseLocalisation = itemView.findViewById(R.id.textViewNameBaliseLocalisation) as TextView
         val buttonMaps = itemView.findViewById(R.id.buttonLocalisation) as ImageButton
@@ -39,6 +43,8 @@ class AdapterBaliseLocalisation(private val context: Context, private val list:A
             val intent: Intent = Intent(context, DetailLocalisationActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("balise", item)
+            intent.putExtras(bundle)
+            bundle.putParcelable("currentLocation", currentLocation)
             intent.putExtras(bundle)
             context.startActivity(intent)
         }

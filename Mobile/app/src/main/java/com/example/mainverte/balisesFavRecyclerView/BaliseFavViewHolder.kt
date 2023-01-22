@@ -1,5 +1,8 @@
 package com.example.mainverte.balisesFavRecyclerView
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +11,8 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainverte.R
+import com.example.mainverte.activity.InfoBaliseActivity
+import com.example.mainverte.models.Balise
 import com.example.mainverte.room.MainVerteDataBase
 import com.example.mainverte.room.models.BaliseFav
 import java.util.concurrent.ExecutorService
@@ -16,7 +21,6 @@ import java.util.concurrent.Executors
 class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     var executor: ExecutorService = Executors.newSingleThreadExecutor()
-
 
     private val nameBalise: TextView = itemView.findViewById(R.id.textViewNameBalise)
     val buttonSupp: ImageButton = itemView.findViewById(R.id.buttonSupp)
@@ -34,7 +38,12 @@ class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             //TODO
         }
         buttonDetail.setOnClickListener{
-            //TODO
+            val temp = Balise(baliseFav.id, baliseFav.nameBalise)
+            val intent: Intent = Intent(itemView.context, InfoBaliseActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("balise", temp)
+            intent.putExtras(bundle)
+            itemView.context.startActivity(intent)
         }
     }
 

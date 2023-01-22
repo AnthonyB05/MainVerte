@@ -15,10 +15,7 @@ import com.example.mainverte.R
 import com.example.mainverte.api.Api
 import com.example.mainverte.databinding.ActivityMapsBinding
 import com.example.mainverte.listing.ListBalisesActivity
-import com.example.mainverte.models.Balise
-import com.example.mainverte.models.ListBalises
-import com.example.mainverte.models.ListData
-import com.example.mainverte.models.OneBaliseData
+import com.example.mainverte.models.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -28,9 +25,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
+import com.google.maps.android.clustering.ClusterManager
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.awaitResponse
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -51,19 +52,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+
         val intent = intent
         this.currentLocation = intent.getParcelableExtra<LatLng>("currentLocation")
-        this.apiListBalises = intent.getParcelableArrayListExtra("apiListbalises")
+        //this.apiListBalises = intent.getParcelableArrayListExtra("apiListbalises")
         // gestion des tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.text!!.equals("Liste balises")) {
                     val intent: Intent = Intent(this@MapsActivity, ListBalisesActivity::class.java);
-                    if (apiListBalises != null) {
-                        val bundle = Bundle()
-                        bundle.putParcelableArrayList("apiListBalises", apiListBalises)
-                        intent.putExtras(bundle)
-                    }
                     startActivity(intent);
                 }
             }
@@ -76,6 +73,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
     }
 
+
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -86,10 +85,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
+
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        //current location
+        //add markercurrent location
         if (this.currentLocation != null) {
             mMap.addMarker(
                 MarkerOptions().position(this.currentLocation!!).title("Moi")
@@ -97,37 +96,53 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation!!, 20F))
         }
-        if (this.apiListBalises != null) {
-            var i = 0
-            while (i < this.apiListBalises!!.size) {
-                var tempName = apiListBalises!![i].nameBalise
-                var data = Api.apiService.getLastBaliseDataById(this.apiListBalises!![i].id)
-                data.enqueue(object : Callback<OneBaliseData> {
-                    override fun onResponse(
-                        call: Call<OneBaliseData>,
-                        response: retrofit2.Response<OneBaliseData>
-                    ) {
-                        var temp = response.body()
-                        if (response.code().equals(200)) {
-                            val data = temp!!.balisesData
-                            val latLng = LatLng(data!!.latitude, data!!.longitude)
-                            if (currentLocation != null){
-                                mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
-                            }
-                            else{
-                                mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 20F))
+
+        GlobalScope.launch {
+            getCurrentBalise()
+            if (apiListBalises != null) {
+                var i = 0
+                while (i < apiListBalises!!.size) {
+                    var tempName = apiListBalises!![i].nameBalise
+                    var data = Api.apiService.getLastBaliseDataById(apiListBalises!![i].id)
+                    data.enqueue(object : Callback<OneBaliseData> {
+                        override fun onResponse(
+                            call: Call<OneBaliseData>,
+                            response: retrofit2.Response<OneBaliseData>
+                        ) {
+                            var temp = response.body()
+                            if (response.code().equals(200)) {
+                                val data = temp!!.balisesData
+                                val latLng = LatLng(data!!.latitude, data!!.longitude)
+                                if (currentLocation != null){
+                                    mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
+                                }
+                                else{
+                                    mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 20F))
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(call: Call<OneBaliseData>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
-                    }
+                        override fun onFailure(call: Call<OneBaliseData>, t: Throwable) {
+                            Toast.makeText(this@MapsActivity, t.message, Toast.LENGTH_SHORT).show()
+                        }
 
-                })
-                i++
+                    })
+                    i++
+                }
             }
+        }
+    }
+
+    private suspend fun getCurrentBalise() {
+        try{
+            val response = Api.apiService.getBalises().awaitResponse()
+            if (response.isSuccessful){
+                apiListBalises = response.body()!!.balises
+            }
+        }
+        catch (t: Throwable){
+            Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
         }
     }
 
