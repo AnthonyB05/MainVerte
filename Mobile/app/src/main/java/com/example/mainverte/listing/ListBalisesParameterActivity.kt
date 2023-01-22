@@ -25,7 +25,7 @@ class ListBalisesParameterActivity : AppCompatActivity() {
         data.enqueue(object : Callback<ListBalises> {
             override fun onResponse(call: Call<ListBalises>, response: Response<ListBalises>) {
                 if (response.isSuccessful){
-                    recyclerViewParameter.adapter = AdapterBalise(this@ListBalisesParameterActivity, response.body()!!.balises!!)
+                    recyclerViewParameter.adapter = AdapterBaliseParameter(this@ListBalisesParameterActivity, response.body()!!.balises!!)
                 }
             }
             override fun onFailure(call: Call<ListBalises>, t: Throwable) {

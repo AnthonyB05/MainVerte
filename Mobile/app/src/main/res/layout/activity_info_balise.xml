@@ -8,85 +8,114 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left">
-
-        <ImageButton
-            android:id="@+id/imageButtonFavoris"
-            android:layout_weight="0"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:background="#FFFFFF"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:src="@android:drawable/star_big_on" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewNameBalise"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="NameBalise"
-            android:layout_margin="16dp"
-            style="@style/Title"
-            android:gravity="center"/>
+            android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
-            android:text="Température : " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewInfoTemp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="10°C"
-            android:layout_margin="5dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Humidité :"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+                    <ImageButton
+                        android:id="@+id/imageButtonFavoris"
+                        android:layout_weight="0"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="#FFFFFF"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:src="@android:drawable/star_big_on" />
 
-        <TextView
-            android:id="@+id/textViewInfoHumid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            tools:text="20" />
+                </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Luminosité :"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textViewNameBalise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="NameBalise"
+                    android:layout_margin="16dp"
+                    style="@style/Title"
+                    android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/textViewInfoLum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            tools:text="20" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:text="Température : " />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textViewInfoTemp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="10°C"
+                    android:layout_margin="5dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Humidité :"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewInfoHumid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    tools:text="20" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Luminosité :"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewInfoLum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    tools:text="20" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
 
 </LinearLayout>

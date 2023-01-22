@@ -44,6 +44,10 @@ dependencies {
     def room_version = "2.4.3"
     def lifecycle_version = "2.5.1"
 
+    //MpAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //Maps
     implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
 
     //Retrofit
@@ -58,7 +62,6 @@ dependencies {
 
     // OkHttp
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.2'
-
 
     // GSON
     implementation 'com.google.code.gson:gson:2.10'
