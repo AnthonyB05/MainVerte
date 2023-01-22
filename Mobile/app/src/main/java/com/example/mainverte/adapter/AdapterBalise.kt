@@ -33,7 +33,7 @@ class AdapterBalise(private val context: Context, private val list: ArrayList<Ba
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        holder.textViewNameBalise.setText(item.name)
+        holder.textViewNameBalise.setText(item.nameBalise)
         holder.buttonMaps.setOnClickListener {
             Toast.makeText(context, "test", Toast.LENGTH_SHORT).show()
         }

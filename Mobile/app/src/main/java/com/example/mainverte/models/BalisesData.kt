@@ -2,21 +2,20 @@ package com.example.mainverte.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import java.util.Date
 
-data class Data(
-    val id: Long,
+data class BalisesData(
+    val _id: String?,
     val idBalise: Long,
-    val degreCelcius: Double,
+    val degreCelsius: Double,
     val humiditeExt: Double,
     val luminosite: Double,
     val longitude: Double,
     val latitude: Double,
     val date: Date
-) : Parcelable {
+): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readLong(),
+        parcel.readString(),
         parcel.readLong(),
         parcel.readDouble(),
         parcel.readDouble(),
@@ -28,9 +27,9 @@ data class Data(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(id)
+        parcel.writeString(_id)
         parcel.writeLong(idBalise)
-        parcel.writeDouble(degreCelcius)
+        parcel.writeDouble(degreCelsius)
         parcel.writeDouble(humiditeExt)
         parcel.writeDouble(luminosite)
         parcel.writeDouble(longitude)
@@ -41,13 +40,23 @@ data class Data(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Data> {
-        override fun createFromParcel(parcel: Parcel): Data {
-            return Data(parcel)
+    companion object CREATOR : Parcelable.Creator<BalisesData> {
+        override fun createFromParcel(parcel: Parcel): BalisesData {
+            return BalisesData(parcel)
         }
 
-        override fun newArray(size: Int): Array<Data?> {
+        override fun newArray(size: Int): Array<BalisesData?> {
             return arrayOfNulls(size)
         }
     }
 }
+
+data class OneBaliseData(
+    val balisesData: BalisesData? = null,
+
+    )
+
+data class ListData(
+    val balisesData: ArrayList<BalisesData>?= null,
+)
+

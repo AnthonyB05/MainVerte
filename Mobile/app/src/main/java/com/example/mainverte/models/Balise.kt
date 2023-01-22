@@ -4,8 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Balise(
-    val idBalise: Long,
-    val name: String?
+    val id: Long,
+    val nameBalise: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
@@ -14,8 +14,8 @@ data class Balise(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(idBalise)
-        parcel.writeString(name)
+        parcel.writeLong(id)
+        parcel.writeString(nameBalise)
     }
 
     override fun describeContents(): Int {
@@ -32,3 +32,7 @@ data class Balise(
         }
     }
 }
+
+data class ListBalises(
+    val balises: ArrayList<Balise>?= null
+)

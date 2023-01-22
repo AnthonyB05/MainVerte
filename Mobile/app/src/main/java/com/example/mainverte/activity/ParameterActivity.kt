@@ -40,9 +40,9 @@ class ParameterActivity : AppCompatActivity() {
         this.balise = intent.getParcelableExtra("balise")
 
         if (this.balise != null) {
-            textTitle.text = "Paramètres de " + this.balise!!.name
+            textTitle.text = "Paramètres de " + this.balise!!.nameBalise
 
-            parameterViewModel.getParameterByIdBalise(balise!!.idBalise!!)
+            parameterViewModel.getParameterByIdBalise(balise!!.id!!)
                 .observe(this) { parameter ->
                     if (parameter.isNullOrEmpty()){
                         defaultNumber()
@@ -74,7 +74,7 @@ class ParameterActivity : AppCompatActivity() {
     fun mappingToParameter(){
         defaultNumber()
         if (this.balise != null){
-            userParameter = Parameter(this.balise!!.idBalise,this.balise!!.name!!,Integer.parseInt(inputTempMin.getText().toString()), Integer.parseInt(inputTempMax.getText().toString()), Integer.parseInt(inputHumiditeMin.getText().toString()),
+            userParameter = Parameter(this.balise!!.id,this.balise!!.nameBalise!!,Integer.parseInt(inputTempMin.getText().toString()), Integer.parseInt(inputTempMax.getText().toString()), Integer.parseInt(inputHumiditeMin.getText().toString()),
                 Integer.parseInt(inputHumiditeMax.getText().toString()),switchTemp.isChecked, switchHumid.isChecked)
 
         }
