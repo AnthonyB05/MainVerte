@@ -13,12 +13,10 @@ import com.example.mainverte.balisesFavRecyclerView.BaliseFavViewModel
 import com.example.mainverte.balisesFavRecyclerView.BaliseFavViewModelFactory
 import com.example.mainverte.models.*
 import com.example.mainverte.room.models.BaliseFav
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_info_balise.*
-import retrofit2.Call
-import retrofit2.Callback
+import kotlinx.coroutines.*
+
+import retrofit2.awaitResponse
 
 class InfoBaliseActivity : AppCompatActivity() {
 
@@ -33,13 +31,16 @@ class InfoBaliseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_info_balise)
         val intent = intent
         this.balise = intent.getParcelableExtra("balise")
+        this.listBaliseData = intent.getParcelableArrayListExtra("listBaliseData")
         if (balise != null ){
             textViewNameBalise.text = balise!!.nameBalise
-            getBaliseData(balise!!.id)
-            if (listBaliseData != null){
-                textViewInfoTemp.text = listBaliseData!![0].degreCelsius.toString() + "°C"
-                textViewInfoHumid.text = listBaliseData!![0].humiditeExt.toString()
-                textViewInfoLum.text = listBaliseData!![0].luminosite.toString()
+            GlobalScope.launch {
+                getCurrentBalise(balise!!.id)
+                if (listBaliseData != null) {
+                    textViewInfoTemp.text = listBaliseData!![0].degreCelsius.toString() + "°C"
+                    textViewInfoHumid.text = listBaliseData!![0].humiditeExt.toString()
+                    textViewInfoLum.text = listBaliseData!![0].luminosite.toString()
+                }
             }
             // action button
             imageButtonFavoris.setOnClickListener {
@@ -71,25 +72,17 @@ class InfoBaliseActivity : AppCompatActivity() {
         }
     }
 
-    private fun getBaliseData(id: Long) {
-        var data = Api.apiService.getBaliseDataById(id)
-        data.enqueue(object : Callback<ListData> {
-            override fun onResponse(
-                call: Call<ListData>,
-                response: retrofit2.Response<ListData>
-            ) {
-                var temp = response.body()
-                if (response.code().equals(200)) {
-                    val data = temp!!.balisesData
-                    listBaliseData = data
 
-                }
-            }
-
-            override fun onFailure(call: Call<ListData>, t: Throwable) {
-                Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
-            }
-
-        })
+    private suspend fun getCurrentBalise(id: Long) {
+       try{
+           val response = Api.apiService.getBaliseDataById(id).awaitResponse()
+           if (response.isSuccessful){
+               listBaliseData = response.body()!!.balisesData
+           }
+       }
+       catch (t: Throwable){
+            Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
+       }
     }
+
 }
