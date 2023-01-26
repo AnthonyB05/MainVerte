@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".listing.ListLocalisationActivity">
+    tools:context=".listing.ListLocalisationActivity"
+    android:gravity="center|center_horizontal">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Title"
+        android:textColor="#FD0000"
+        android:text="Localisation" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBaliseLocalisation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

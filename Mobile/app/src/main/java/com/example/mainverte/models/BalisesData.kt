@@ -12,7 +12,7 @@ data class BalisesData(
     val luminosite: Double,
     var longitude: Double,
     var latitude: Double,
-    val date: Date
+    var date: Date
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

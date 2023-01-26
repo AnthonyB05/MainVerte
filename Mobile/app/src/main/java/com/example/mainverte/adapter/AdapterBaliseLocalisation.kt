@@ -44,8 +44,8 @@ class AdapterBaliseLocalisation(private val context: Context, private val list:A
             val bundle = Bundle()
             bundle.putParcelable("balise", item)
             intent.putExtras(bundle)
-            bundle.putParcelable("currentLocation", currentLocation)
-            intent.putExtras(bundle)
+/*            bundle.putParcelable("currentLocation", currentLocation)
+            intent.putExtras(bundle)*/
             context.startActivity(intent)
         }
 
