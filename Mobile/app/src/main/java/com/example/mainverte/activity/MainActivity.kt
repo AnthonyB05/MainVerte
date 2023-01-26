@@ -17,38 +17,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.KeyEventDispatcher
-import androidx.core.view.KeyEventDispatcher.Component
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.mainverte.R
-import com.example.mainverte.api.Api
-import com.example.mainverte.api.ApiService
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.listing.ListBalisesFavActivity
 import com.example.mainverte.listing.ListBalisesParameterActivity
 import com.example.mainverte.listing.ListLocalisationActivity
-import com.example.mainverte.models.*
 import com.example.mainverte.utils.Network
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import java.util.Objects
 
 
 class MainActivity : AppCompatActivity() {
@@ -108,11 +89,6 @@ class MainActivity : AppCompatActivity() {
         }
         buttonLocalisation.setOnClickListener {
             val intent: Intent = Intent(this@MainActivity, ListLocalisationActivity::class.java)
-            if (this.currentLocation != null){
-                val bundle = Bundle()
-                bundle.putParcelable("currentLocation", this.currentLocation)
-                intent.putExtras(bundle)
-            }
             startActivity(intent)
         }
     }
@@ -137,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                     if (location == null) {
                         Toast.makeText(this, "Null Recieved", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
                         val coord = LatLng(location.latitude, location.longitude)
                         this.currentLocation = coord
                     }

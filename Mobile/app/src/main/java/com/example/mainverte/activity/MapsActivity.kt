@@ -56,9 +56,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //récupération de la localisation
-        /*fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        getCurrentLocation();*/
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -99,6 +97,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getCurrentLocation();
 
         //add markercurrent location
         if (this.currentLocation != null) {
@@ -166,7 +166,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     if (location == null) {
                         Toast.makeText(this, "Null Recieved", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
                         val coord = LatLng(location.latitude, location.longitude)
                         this.currentLocation = coord
                     }
@@ -234,6 +234,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
 
     private suspend fun getCurrentBalise() {
         try{

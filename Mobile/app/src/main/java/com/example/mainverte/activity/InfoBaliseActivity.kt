@@ -26,6 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class InfoBaliseActivity : AppCompatActivity() {
 
@@ -57,6 +58,7 @@ class InfoBaliseActivity : AppCompatActivity() {
                             textViewInfoLum.text = listBaliseData!![0].luminosite.toString()
                             //populateLineChartTemp(listBaliseData!!)
                             averagePerDayTemp(listBaliseData!!)
+
                         }
                     }
                 }
@@ -127,33 +129,41 @@ class InfoBaliseActivity : AppCompatActivity() {
     }
 
 
-    private fun averagePerDayTemp(values: ArrayList<BalisesData>) {
+    private fun averagePerDayTemp(values: ArrayList<BalisesData>): ArrayList<ArrayList<String>> {
         val sdf = SimpleDateFormat("dd/MM/yyyy")
-        var averageTemp: ArrayList<String>
         var count = 0
         var total = 0.00
         var average = 0.00
-        var listAveragePerDay = ArrayList<String>()
+        var listAveragePerDay = ArrayList<ArrayList<String>>()
+        var listDateFaite = ArrayList<String>()
         if (values != null)
-            for (item in values) {
+            for (item in values.sortedBy { it.date }) {
                 var tempDate = sdf.format(item.date)
                 var saveDate = tempDate
-                for (item2 in values){
-                    var tempDate2 = sdf.format(item2.date)
-                    if (saveDate.equals(tempDate2)){
-                        count++
-                        total += item2.degreCelsius
-                        average = total/count
-                    }
-                    else{
-                        listAveragePerDay.add(average.toString())
-                        count = 0
-                        total = 0.0
-                        average = 0.0
-                        break
+                if (!listDateFaite.contains(saveDate)){
+                    for (item2 in values.sortedBy { it.date }){
+                        var tempDate2 = sdf.format(item2.date)
+                        if (saveDate.equals(tempDate2)){
+                            count++
+                            total += item2.degreCelsius
+                            average = total/count
+                        }
+                        else{
+                            if (total <= 0.0){
+                                average = item.degreCelsius
+                            }
+                            var tempList = arrayListOf<String>(saveDate, average.toString())
+                            listAveragePerDay.add(tempList)
+                            listDateFaite.add(saveDate)
+                            count = 0
+                            total = 0.0
+                            average = 0.0
+                            break
+                        }
                     }
                 }
             }
+        return listAveragePerDay
     }
 
 

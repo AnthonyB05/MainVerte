@@ -120,7 +120,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
                     if (location == null) {
                         Toast.makeText(this, "Null Recieved", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
+                       // Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
                         val coord = LatLng(location.latitude, location.longitude)
                         this.currentLocation = coord
                     }
