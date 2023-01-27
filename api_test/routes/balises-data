@@ -4,69 +4,77 @@ const baliseJson = require('../../balises-data.json');
 const baliseData = require('../model/balise-data');
 const mongoose = require('mongoose');
 const verifyToken = require('../../verifyToken');
-router.get('/',verifyToken, (req,res,next) => {  
-    baliseData.find().sort({date:-1})
-    .then(result=>{
-       res.status(200).json({
-           balisesData:result
-       }
+router.get('/', verifyToken, (req, res, next) => {
+    baliseData.find().sort({ date: -1 })
+        .then(result => {
+            res.status(200).json({
+                balisesData: result
+            }
 
-       )
-    })})
+            )
+        })
+})
 
-router.post('/',verifyToken,(req,res,next)=>{
+router.post('/', verifyToken, (req, res, next) => {
     const uneBaliseData = new baliseData({
         idBalise: req.body.idBalise,
-        degreCelsius:req.body.degreCelsius,
+        degreCelsius: req.body.degreCelsius,
         humiditeExt: req.body.humiditeExt,
         luminosite: req.body.luminosite,
         longitude: req.body.longitude,
         latitude: req.body.latitude,
-       
-    })
-    uneBaliseData.save()
-   .then(result=>{
-    console.log(result);
-    res.status(200).json({
-        newBalise:result
-    })
-   })
-   .catch(err=>{
-    console.log(err);
-    res.status(500).json({
-        error:err
-    });
-   })
- })
 
- router.get('/:id',verifyToken,(req,res,next) => { 
-    console.log(req.params.id)
-    baliseData.find({idBalise: req.params.id}).sort({date: -1})
-    .then(result=>{
-        res.status(200).json({
-            balisesData:result
-        })
     })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({
-            error:err
-        })
-    })
+    if (uneBaliseData.idBalise && uneBaliseData.degreCelsius && uneBaliseData.humiditeExt && uneBaliseData.luminosite && uneBaliseData.longitude && uneBaliseData.latitude) {
+        uneBaliseData.save()
+            .then(result => {
+                console.log(result);
+                res.status(200).json({
+                    newBalise: result
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            })
+    }
+    else{
+        res.status(400).json({
+            error:"bad request"})
+    }
+
 })
-router.get('/:id/last',(req,res,next) => { 
+
+router.get('/:id', verifyToken, (req, res, next) => {
     console.log(req.params.id)
-    baliseData.findOne({idBalise: req.params.id}).sort({date: -1})
-    .then(result=>{
-        res.status(200).json({
-            balisesData:result
+    baliseData.find({ idBalise: req.params.id }).sort({ date: -1 })
+        .then(result => {
+            res.status(200).json({
+                balisesData: result
+            })
         })
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({
-            error:err
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
         })
-    })
+})
+router.get('/:id/last', verifyToken, (req, res, next) => {
+    console.log(req.params.id)
+    baliseData.findOne({ idBalise: req.params.id }).sort({ date: -1 })
+        .then(result => {
+            res.status(200).json({
+                balisesData: result
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        })
 })
 module.exports = router;
