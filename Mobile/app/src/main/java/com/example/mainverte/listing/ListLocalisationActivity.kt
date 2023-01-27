@@ -9,6 +9,7 @@ import com.example.mainverte.adapter.AdapterBaliseLocalisation
 import com.example.mainverte.api.Api
 import com.example.mainverte.models.Balise
 import com.example.mainverte.models.ListBalises
+import com.example.mainverte.utils.Constant
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory.Adapter
 import kotlinx.android.synthetic.main.activity_list_balises.*
@@ -27,7 +28,7 @@ class ListLocalisationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_localisation)
         val intent = intent
         this.currentLocation = intent.getParcelableExtra("currentLocation")
-        var data = Api.apiService.getBalises()
+        var data = Api.apiService.getBalises(Constant.token)
         data.enqueue(object : Callback<ListBalises> {
             override fun onResponse(call: Call<ListBalises>, response: Response<ListBalises>) {
                 if (response.isSuccessful){

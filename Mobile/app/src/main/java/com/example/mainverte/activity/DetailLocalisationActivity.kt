@@ -22,6 +22,7 @@ import com.example.mainverte.models.BalisesData
 import com.example.mainverte.models.ListBalises
 import com.example.mainverte.models.OneBaliseData
 import com.example.mainverte.room.models.BaliseFav
+import com.example.mainverte.utils.Constant
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
@@ -69,7 +70,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
 
     private fun createBaliseData(balisesData: BalisesData) {
 
-        var data = Api.apiService.createBaliseData(balisesData)
+        var data = Api.apiService.createBaliseData(Constant.token,balisesData)
         data.enqueue(object : Callback<BalisesData>{
             override fun onResponse(call: Call<BalisesData>, response: Response<BalisesData>) {
                 if (response.isSuccessful){
@@ -86,7 +87,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
 
     private fun getLastBaliseData(id: Long) {
 
-        var data = Api.apiService.getLastBaliseDataById(id)
+        var data = Api.apiService.getLastBaliseDataById(Constant.token,id)
         data.enqueue(object : Callback<OneBaliseData>{
             override fun onResponse(call: Call<OneBaliseData>, response: Response<OneBaliseData>) {
                 if (response.isSuccessful){

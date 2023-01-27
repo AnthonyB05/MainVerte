@@ -13,6 +13,7 @@ import com.example.mainverte.balisesFavRecyclerView.BaliseFavViewModel
 import com.example.mainverte.balisesFavRecyclerView.BaliseFavViewModelFactory
 import com.example.mainverte.models.*
 import com.example.mainverte.room.models.BaliseFav
+import com.example.mainverte.utils.Constant
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -46,7 +47,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         this.balise = intent.getParcelableExtra("balise")
         if (balise != null) {
             textViewNameBalise.text = balise!!.nameBalise
-            var data = Api.apiService.getBaliseDataById(balise!!.id)
+            var data = Api.apiService.getBaliseDataById(Constant.token,balise!!.id)
             data.enqueue(object : Callback<ListData> {
                 override fun onResponse(call: Call<ListData>, response: Response<ListData>) {
                     if (response.isSuccessful) {

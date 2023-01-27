@@ -9,6 +9,7 @@ import com.example.mainverte.adapter.AdapterBaliseParameter
 import com.example.mainverte.api.Api
 import com.example.mainverte.models.Balise
 import com.example.mainverte.models.ListBalises
+import com.example.mainverte.utils.Constant
 import kotlinx.android.synthetic.main.activity_list_balises.*
 import kotlinx.android.synthetic.main.activity_list_balises_parameter.*
 import retrofit2.Call
@@ -21,7 +22,7 @@ class ListBalisesParameterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_balises_parameter)
-        var data = Api.apiService.getBalises()
+        var data = Api.apiService.getBalises(Constant.token)
         data.enqueue(object : Callback<ListBalises> {
             override fun onResponse(call: Call<ListBalises>, response: Response<ListBalises>) {
                 if (response.isSuccessful){

@@ -22,6 +22,7 @@ import com.example.mainverte.api.Api
 import com.example.mainverte.databinding.ActivityMapsBinding
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.models.*
+import com.example.mainverte.utils.Constant
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -115,7 +116,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 var i = 0
                 while (i < apiListBalises!!.size) {
                     var tempName = apiListBalises!![i].nameBalise
-                    var data = Api.apiService.getLastBaliseDataById(apiListBalises!![i].id)
+                    var data = Api.apiService.getLastBaliseDataById(Constant.token,apiListBalises!![i].id)
                     data.enqueue(object : Callback<OneBaliseData> {
                         override fun onResponse(
                             call: Call<OneBaliseData>,
@@ -238,7 +239,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private suspend fun getCurrentBalise() {
         try{
-            val response = Api.apiService.getBalises().awaitResponse()
+            val response = Api.apiService.getBalises(Constant.token).awaitResponse()
             if (response.isSuccessful){
                 apiListBalises = response.body()!!.balises
             }

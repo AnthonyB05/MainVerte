@@ -23,6 +23,7 @@ object Api {
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
     }
 
     val apiService :  ApiService by lazy{

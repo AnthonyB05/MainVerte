@@ -13,15 +13,15 @@ import retrofit2.http.*
 
 interface ApiService {
     @GET("balises")
-    fun getBalises(): Call<ListBalises>
+    fun getBalises(@Header("x-access-token")header: String): Call<ListBalises>
 
     @GET("balises-data/{id}/last")
-    fun getLastBaliseDataById(@Path("id") id: Long): Call<OneBaliseData>
+    fun getLastBaliseDataById(@Header("x-access-token")header: String,@Path("id") id: Long): Call<OneBaliseData>
 
     @GET("balises-data/{id}")
-    fun getBaliseDataById(@Path("id") id: Long): Call<ListData>
+    fun getBaliseDataById(@Header("x-access-token")header: String,@Path("id") id: Long): Call<ListData>
 
     @POST("balises-data")
-    fun createBaliseData(@Body balisesData: BalisesData): Call<BalisesData>
+    fun createBaliseData(@Header("x-access-token")header: String,@Body balisesData: BalisesData): Call<BalisesData>
 
 }
