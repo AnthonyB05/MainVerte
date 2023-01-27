@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 let jwt = require('jsonwebtoken');
 
+
+// Use to generate tok
 /* GET users listing. */
 router.get('/', function (req, res, next) {
+
     res.send('respond with a resource');
 });
 

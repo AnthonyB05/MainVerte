@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const baliseJson = require('../../balises-data.json');
 const baliseData = require('../model/balise-data');
 const mongoose = require('mongoose');
 const verifyToken = require('../../verifyToken');
