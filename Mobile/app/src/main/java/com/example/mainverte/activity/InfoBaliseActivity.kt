@@ -82,7 +82,7 @@ class InfoBaliseActivity : AppCompatActivity() {
 
                 //performing positive action
                 builder.setPositiveButton(R.string.oui) { dialogInterface, which ->
-                    val tempFav = BaliseFav(this.balise!!.nameBalise!!)
+                    val tempFav = BaliseFav(this.balise!!.nameBalise!!, this.balise!!.id)
                     baliseViewModel.insert(tempFav)
                 }
 
@@ -224,7 +224,7 @@ class InfoBaliseActivity : AppCompatActivity() {
 
     private fun populateLineChartLum(values: ArrayList<BalisesData>) {
         val ourLineChartEntries: ArrayList<Entry> = ArrayList()
-        val listAverageLum :  ArrayList<ArrayList<String>> = averagePerDayHumid(values)
+        val listAverageLum :  ArrayList<ArrayList<String>> = averagePerDayLum(values)
         val listDate = ArrayList<String>()
         var i = 0
         if (listAverageLum.size >0) {

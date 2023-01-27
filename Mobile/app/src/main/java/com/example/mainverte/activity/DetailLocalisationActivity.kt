@@ -30,13 +30,15 @@ import kotlinx.android.synthetic.main.activity_detail_localisation.*
 import kotlinx.android.synthetic.main.activity_info_balise.*
 import kotlinx.android.synthetic.main.activity_info_balise.textViewNameBalise
 import kotlinx.android.synthetic.main.item_balise_location.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailLocalisationActivity : AppCompatActivity() {
 
-    private var balise : Balise? = null
+    private var balise: Balise? = null
     private var baliseData: BalisesData? = null
     private var currentLocation: LatLng? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -49,36 +51,37 @@ class DetailLocalisationActivity : AppCompatActivity() {
         getCurrentLocation();
         val intent = intent
         this.balise = intent.getParcelableExtra("balise")
-        if (this.balise != null){
+        if (balise != null) {
             textViewNameBalise.text = this.balise!!.nameBalise
-            getLastBaliseData(this.balise!!.id)
-
             buttonLocation.setOnClickListener {
-                if (this.currentLocation != null){
-                    if (this.baliseData != null){
-                        this.baliseData!!.latitude = this.currentLocation!!.latitude
-                        this.baliseData!!.longitude = this.currentLocation!!.longitude
-                        createBaliseData(this.baliseData!!)
+                if (currentLocation != null) {
+                    if (balise != null) {
+                        balise!!.latitude = currentLocation!!.latitude
+                        balise!!.longitude = currentLocation!!.longitude
+                        updateBaliseLocalisation(balise!!)
                     }
-                }
-                else{
-                    Toast.makeText(this, "Erreur, veuillez activer votre localisation", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Erreur, veuillez activer votre localisation",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
 
-    private fun createBaliseData(balisesData: BalisesData) {
+    private fun updateBaliseLocalisation(balise: Balise) {
 
-        var data = Api.apiService.createBaliseData(Constant.token,balisesData)
-        data.enqueue(object : Callback<BalisesData>{
-            override fun onResponse(call: Call<BalisesData>, response: Response<BalisesData>) {
+        var data = Api.apiService.updateBaliseLocalisation(Constant.token,balise.id,balise)
+        data.enqueue(object : Callback<Balise>{
+            override fun onResponse(call: Call<Balise>, response: Response<Balise>) {
                 if (response.isSuccessful){
                     Toast.makeText(this@DetailLocalisationActivity, "Mise à jour de la localisation avec succès", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<BalisesData>, t: Throwable) {
+            override fun onFailure(call: Call<Balise>, t: Throwable) {
                 Toast.makeText(this@DetailLocalisationActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
@@ -87,15 +90,17 @@ class DetailLocalisationActivity : AppCompatActivity() {
 
     private fun getLastBaliseData(id: Long) {
 
-        var data = Api.apiService.getLastBaliseDataById(Constant.token,id)
-        data.enqueue(object : Callback<OneBaliseData>{
+        var data = Api.apiService.getLastBaliseDataById(Constant.token, id)
+        data.enqueue(object : Callback<OneBaliseData> {
             override fun onResponse(call: Call<OneBaliseData>, response: Response<OneBaliseData>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     baliseData = response.body()!!.balisesData
                 }
             }
+
             override fun onFailure(call: Call<OneBaliseData>, t: Throwable) {
-                Toast.makeText(this@DetailLocalisationActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetailLocalisationActivity, t.message, Toast.LENGTH_SHORT)
+                    .show()
             }
 
         })
@@ -121,7 +126,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
                     if (location == null) {
                         Toast.makeText(this, "Null Recieved", Toast.LENGTH_SHORT).show()
                     } else {
-                       // Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
+                        // Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
                         val coord = LatLng(location.latitude, location.longitude)
                         this.currentLocation = coord
                     }

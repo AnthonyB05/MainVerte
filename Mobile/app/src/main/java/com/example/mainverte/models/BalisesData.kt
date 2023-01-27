@@ -10,15 +10,11 @@ data class BalisesData(
     val degreCelsius: Double,
     val humiditeExt: Double,
     val luminosite: Double,
-    var longitude: Double,
-    var latitude: Double,
     var date: Date
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readLong(),
-        parcel.readDouble(),
-        parcel.readDouble(),
         parcel.readDouble(),
         parcel.readDouble(),
         parcel.readDouble(),
@@ -32,8 +28,6 @@ data class BalisesData(
         parcel.writeDouble(degreCelsius)
         parcel.writeDouble(humiditeExt)
         parcel.writeDouble(luminosite)
-        parcel.writeDouble(longitude)
-        parcel.writeDouble(latitude)
     }
 
     override fun describeContents(): Int {

@@ -18,6 +18,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.mainverte.R
+import com.example.mainverte.adapter.AdapterBalise
 import com.example.mainverte.api.Api
 import com.example.mainverte.databinding.ActivityMapsBinding
 import com.example.mainverte.listing.ListBalisesActivity
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
 import com.google.maps.android.clustering.ClusterManager
+import kotlinx.android.synthetic.main.activity_list_balises.*
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -50,7 +52,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var currentLocation: LatLng? = null
     private var apiListBalises: ArrayList<Balise>? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
+    private var zoomBalise : Balise? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +68,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val intent = intent
         this.currentLocation = intent.getParcelableExtra<LatLng>("currentLocation")
+        zoomBalise = intent.getParcelableExtra("zoomBalise")
         //this.apiListBalises = intent.getParcelableArrayListExtra("apiListbalises")
         // gestion des tab
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -83,7 +86,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
     }
-
 
 
     /**
@@ -110,40 +112,59 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation!!, 20F))
         }
 
-        GlobalScope.launch {
-            getCurrentBalise()
-            if (apiListBalises != null) {
-                var i = 0
-                while (i < apiListBalises!!.size) {
-                    var tempName = apiListBalises!![i].nameBalise
-                    var data = Api.apiService.getLastBaliseDataById(Constant.token,apiListBalises!![i].id)
-                    data.enqueue(object : Callback<OneBaliseData> {
-                        override fun onResponse(
-                            call: Call<OneBaliseData>,
-                            response: retrofit2.Response<OneBaliseData>
-                        ) {
-                            var temp = response.body()
-                            if (response.code().equals(200)) {
-                                val data = temp!!.balisesData
-                                val latLng = LatLng(data!!.latitude, data!!.longitude)
-                                if (currentLocation != null){
-                                    mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
-                                }
-                                else{
-                                    mMap.addMarker(MarkerOptions().position(latLng).title(tempName))
-                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng!!, 20F))
+        if (zoomBalise != null){
+            if (zoomBalise!!.latitude.equals(0.0)){
+                var data = Api.apiService.getBaliseById(Constant.token, zoomBalise!!.id)
+                data.enqueue(object : Callback<OneBalise> {
+                    override fun onResponse(call: Call<OneBalise>, response: retrofit2.Response<OneBalise>) {
+                        if (response.isSuccessful) {
+                            val zoomBalise = response.body()!!.balise!![0]
+                            val tempLatLng = LatLng(zoomBalise!!.latitude, zoomBalise!!.longitude)
+                            mMap.addMarker(MarkerOptions().position(tempLatLng).title(zoomBalise!!.nameBalise))
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng, 20F))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<OneBalise>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, t.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+                })
+            }
+            else{
+                val tempLatLng = LatLng(zoomBalise!!.latitude, zoomBalise!!.longitude)
+                mMap.addMarker(MarkerOptions().position(tempLatLng).title(zoomBalise!!.nameBalise))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng, 20F))
+            }
+        }
+        else{
+            var data = Api.apiService.getBalises(Constant.token)
+            data.enqueue(object : Callback<ListBalises> {
+                override fun onResponse(
+                    call: Call<ListBalises>,
+                    response: retrofit2.Response<ListBalises>
+                ) {
+                    if (response.isSuccessful) {
+                        apiListBalises = response.body()!!.balises
+                        if (apiListBalises!!.size > 0) {
+                            for (item in apiListBalises!!) {
+                                val tempLatLng = LatLng(item.latitude, item.longitude)
+                                if (currentLocation != null) {
+                                    mMap.addMarker(MarkerOptions().position(tempLatLng).title(item.nameBalise))
+                                } else {
+                                    mMap.addMarker(MarkerOptions().position(tempLatLng).title(item.nameBalise))
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tempLatLng!!, 20F))
                                 }
                             }
                         }
-
-                        override fun onFailure(call: Call<OneBaliseData>, t: Throwable) {
-                            Toast.makeText(this@MapsActivity, t.message, Toast.LENGTH_SHORT).show()
-                        }
-
-                    })
-                    i++
+                    }
                 }
-            }
+
+                override fun onFailure(call: Call<ListBalises>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 
@@ -233,19 +254,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-
-    private suspend fun getCurrentBalise() {
-        try{
-            val response = Api.apiService.getBalises(Constant.token).awaitResponse()
-            if (response.isSuccessful){
-                apiListBalises = response.body()!!.balises
-            }
-        }
-        catch (t: Throwable){
-            Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
         }
     }
 

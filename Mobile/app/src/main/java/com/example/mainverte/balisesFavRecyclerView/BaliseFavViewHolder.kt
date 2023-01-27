@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainverte.R
 import com.example.mainverte.activity.InfoBaliseActivity
+import com.example.mainverte.activity.MapsActivity
 import com.example.mainverte.models.Balise
 import com.example.mainverte.room.MainVerteDataBase
 import com.example.mainverte.room.models.BaliseFav
@@ -35,10 +36,15 @@ class BaliseFavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
         buttonMaps.setOnClickListener {
-            //TODO
+            val temp = Balise(baliseFav.id, baliseFav.nameBalise, 0.0, 0.0)
+            val intent: Intent = Intent(itemView.context, MapsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("zoomBalise", temp)
+            intent.putExtras(bundle)
+            itemView.context.startActivity(intent)
         }
         buttonDetail.setOnClickListener{
-            val temp = Balise(baliseFav.id, baliseFav.nameBalise)
+            val temp = Balise(baliseFav.id, baliseFav.nameBalise, 0.0, 0.0)
             val intent: Intent = Intent(itemView.context, InfoBaliseActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable("balise", temp)

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainverte.R
 import com.example.mainverte.activity.InfoBaliseActivity
+import com.example.mainverte.activity.MapsActivity
 import com.example.mainverte.listing.ListBalisesActivity
 
 import com.example.mainverte.models.Balise
@@ -35,7 +36,11 @@ class AdapterBalise(private val context: Context, private val list: ArrayList<Ba
         val item = list[position]
         holder.textViewNameBalise.setText(item.nameBalise)
         holder.buttonMaps.setOnClickListener {
-            Toast.makeText(context, "test", Toast.LENGTH_SHORT).show()
+            val intent: Intent = Intent(context, MapsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("zoomBalise", item)
+            intent.putExtras(bundle)
+            context.startActivity(intent)
         }
         holder.buttonInfo.setOnClickListener {
             val intent: Intent = Intent(context, InfoBaliseActivity::class.java)
