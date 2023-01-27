@@ -3,7 +3,7 @@ const router = express.Router();
 const balisesJson = require('../../balises.json');
 const Balise = require('../model/balise');
 const mongoose = require('mongoose')
-let verifyToken = require('../../verifytoken');
+const verifyToken = require('../../verifyToken');
 
 
 
