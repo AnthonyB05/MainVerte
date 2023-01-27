@@ -81,7 +81,7 @@ PubSubClient mqttClient(wifiClient);
 unsigned long lastMsg = 0;
 char msg[75];
 int value = 0;
-int motor = 10;
+int motor = 5;
 
 void connect() {
   while (!mqttClient.connected()) {
@@ -236,7 +236,7 @@ void setup() {
 
 }
 
-void DHTSensor(){
+void DHTSensor(int intensity){
   delay(2000);
 
   // Reading temperature or humidity takes about 250 milliseconds!
@@ -271,11 +271,8 @@ void DHTSensor(){
   Serial.print(hif);
   Serial.println(F("°F"));
 
-  snprintf (msg, 75, "Température %.2f", t);
-  Serial.print("Publish message: ");
-    Serial.println(msg);
-    mqttClient.publish(mqttTopicOut, msg);
-  snprintf (msg, 75, "Humidité %.2f",h);
+  snprintf(msg, 75,"{\"temperature\":\"%.2f\",\"humidite\":\"%.2f\",\"luminosite\":\"%d\"}", t, h, intensity);
+
   Serial.print("Publish message: ");
     Serial.println(msg);
     mqttClient.publish(mqttTopicOut, msg);
@@ -285,7 +282,7 @@ void MotorSensor(){
   server.handleClient();
 }
 
-void LumSensor(){
+int LumSensor(){
   intensity = 0;
   digitalWrite(CS, LOW); // activation of CS line
   intensity = SPI.transfer(0) << 3; // Aquisition of first 5 bits of data without leading zeros
@@ -296,10 +293,7 @@ void LumSensor(){
   Serial.print("Light intensity = ");
   Serial.println(intensity);
   delay(1000);
-  snprintf (msg, 75, "Luminosité %ld", intensity);
-  Serial.print("Publish message: ");
-    Serial.println(msg);
-    mqttClient.publish(mqttTopicOut, msg);
+  return intensity;
 }
 
 void loop() {
@@ -316,26 +310,27 @@ void loop() {
   if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;
-    DHTSensor();
-    LumSensor();
+
+    int intensity = LumSensor();
+    DHTSensor(intensity);
 
     Serial.print(value);
+    Serial.print("--");
     Serial.print(motor);
+    Serial.print("/////");
 
     if(value == motor){
-
-      Serial.print("good: ");
 
       if(positionSTR.equals("1")){
         Serial.print("position 1: ");
         positionSTR = "2";
         MotorSensor();
-        motor = motor+10;
+        motor = motor+15;
       }else{
         Serial.print("position 2: ");
         positionSTR = "1";
         MotorSensor();
-        motor = motor+30;
+        motor = motor+5;
       }
 
     }
