@@ -319,20 +319,20 @@ void loop() {
     Serial.print(motor);
     Serial.print("/////");
 
-    if(value == motor){
+    // if(value == motor){
 
-      if(positionSTR.equals("1")){
-        Serial.print("position 1: ");
-        positionSTR = "2";
-        MotorSensor();
-        motor = motor+15;
-      }else{
-        Serial.print("position 2: ");
-        positionSTR = "1";
-        MotorSensor();
-        motor = motor+5;
-      }
+    //   if(positionSTR.equals("1")){
+    //     Serial.print("position 1: ");
+    //     positionSTR = "2";
+    //     gestionMoteur();
+    //     motor = motor+10;
+    //   }else{
+    //     Serial.print("position 2: ");
+    //     positionSTR = "1";
+    //     gestionMoteur();
+    //     motor = motor+5;
+    //   }
 
-    }
+    // }
   }
 }
