@@ -9,15 +9,15 @@ global.config = require('./config');
 
 
 
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/login',login);
-app.use('/balises',balisesRoute);
-app.use('/balises-data',baliseDataRoute);
-app.use('/balise/:id',balisesRoute)
-app.use((req,res,next)=>{
+app.use('/login', login);
+app.use('/balises', balisesRoute);
+app.use('/balises-data', baliseDataRoute);
+//app.use('/balise/:id',balisesRoute)
+app.use((req, res, next) => {
     res.status(200).json({
-        message:'app is running'
+        message: 'app is running'
     })
 })
 
@@ -25,16 +25,16 @@ app.use((req,res,next)=>{
 module.exports = app;
 ////////////////////////////////// Connexion BDD //////////////////////////////////
 mongoose.connect("mongodb+srv://root:root@lamainverte.eit2nfv.mongodb.net/LaMainVerte?retryWrites=true&w=majority", {
-  useNewUrlParser: false
-  
- // useUnifiedTopology: true
+    useNewUrlParser: false
+
+    // useUnifiedTopology: true
 });
 const database = mongoose.connection;
-database.on('error',err=>{
+database.on('error', err => {
     console.log("connexion failed");
 
 });
-mongoose.connection.on('connected',connected=>{
+mongoose.connection.on('connected', connected => {
     console.log('connected with db...')
 });
 

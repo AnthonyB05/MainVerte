@@ -56,12 +56,48 @@ router.post('/', verifyToken, (req, res, next) => {
                 });
             })
     }
-    else{
+    else {
         res.status(400).json({
-            error:"bad request"
+            error: "bad request"
         })
     }
 
 })
+
+router.patch('/:id', verifyToken, (req, res, next) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        })
+    }
+    else {
+        console.log(req.params.id);
+        const updateGps = {
+            longitude: req.body.longitude,
+            latitude: req.body.latitude
+        };
+        console.log(updateGps.longitude);
+        if (typeof (updateGps.longitude) === 'number' && typeof (updateGps.latitude) === 'number') {
+
+            Balise.updateOne({ id: req.params.id }, { $set: updateGps }, (err, docs) => {
+
+                if (!err) {
+                    res.status(200).send(docs)
+                } else {
+                    console.log('Error while updating the data' + JSON.stringify(err, undefined, 2))
+                }
+            })
+        }
+        else {
+            res.status(250).json({
+                error: "miaou"
+            });
+        }
+
+
+
+    };
+})
+
 
 module.exports = router;
