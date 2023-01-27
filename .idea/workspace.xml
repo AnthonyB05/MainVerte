@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="276fe340-8478-441a-8583-d29297f7514c" name="Changes" comment="correctif heroku" />
+    <list default="true" id="9d9a209d-7881-4f58-a698-01780faef60e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +10,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="API" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -18,60 +18,31 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2KaH6g4vhqbAKk1ucoOX1BcosFT" />
+  <component name="ProjectId" id="2Ku1MoDHae5RDTFO9WOWAmQ4chj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/abast/OneDrive/Documents/Ynov/IOT/MainVerte&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\abast\OneDrive\Documents\Ynov\IOT\MainVerte" />
-    </key>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="276fe340-8478-441a-8583-d29297f7514c" name="Changes" comment="" />
-      <created>1674205599286</created>
+      <changelist id="9d9a209d-7881-4f58-a698-01780faef60e" name="Changes" comment="" />
+      <created>1674809611613</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1674205599286</updated>
-      <workItem from="1674205600654" duration="1491000" />
-      <workItem from="1674229484162" duration="139000" />
-      <workItem from="1674231585259" duration="49000" />
+      <updated>1674809611613</updated>
+      <workItem from="1674809615857" duration="45000" />
     </task>
-    <task id="LOCAL-00001" summary="correctif heroku">
-      <created>1674205743947</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1674205743947</updated>
-    </task>
-    <task id="LOCAL-00002" summary="correctif heroku">
-      <created>1674205758830</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1674205758830</updated>
-    </task>
-    <task id="LOCAL-00003" summary="correctif heroku">
-      <created>1674209532855</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1674209532855</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,9 +58,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="correctif heroku" />
-    <option name="LAST_COMMIT_MESSAGE" value="correctif heroku" />
   </component>
 </project>

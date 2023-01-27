@@ -51,6 +51,9 @@ Servo myservo;
 
 #include <SPI.h>
 
+
+byte intensity;
+
 /**********************************************************************
  * MQTT
  ***********************************************************************/
@@ -76,8 +79,9 @@ NTPClient timeClient(ntpUDP);
 PubSubClient mqttClient(wifiClient);
 
 unsigned long lastMsg = 0;
-char msg[50];
+char msg[75];
 int value = 0;
+int motor = 10;
 
 void connect() {
   while (!mqttClient.connected()) {
@@ -236,6 +240,7 @@ void DHTSensor(){
   delay(2000);
 
   // Reading temperature or humidity takes about 250 milliseconds!
+
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
   float h = dht.readHumidity();
   // Read temperature as Celsius (the default)
@@ -265,6 +270,15 @@ void DHTSensor(){
   Serial.print(F("°C "));
   Serial.print(hif);
   Serial.println(F("°F"));
+
+  snprintf (msg, 75, "Température %.2f", t);
+  Serial.print("Publish message: ");
+    Serial.println(msg);
+    mqttClient.publish(mqttTopicOut, msg);
+  snprintf (msg, 75, "Humidité %.2f",h);
+  Serial.print("Publish message: ");
+    Serial.println(msg);
+    mqttClient.publish(mqttTopicOut, msg);
 }
 
 void MotorSensor(){
@@ -272,7 +286,7 @@ void MotorSensor(){
 }
 
 void LumSensor(){
-  byte intensity = 0;
+  intensity = 0;
   digitalWrite(CS, LOW); // activation of CS line
   intensity = SPI.transfer(0) << 3; // Aquisition of first 5 bits of data without leading zeros
   intensity |= (SPI.transfer(0) >> 4); //Aquisition of last 3 bits of data and appending
@@ -282,6 +296,10 @@ void LumSensor(){
   Serial.print("Light intensity = ");
   Serial.println(intensity);
   delay(1000);
+  snprintf (msg, 75, "Luminosité %ld", intensity);
+  Serial.print("Publish message: ");
+    Serial.println(msg);
+    mqttClient.publish(mqttTopicOut, msg);
 }
 
 void loop() {
@@ -292,18 +310,34 @@ void loop() {
   mqttClient.loop();
   timeClient.update();
 
-  DHTSensor();
-  MotorSensor();
-  LumSensor();
+ unsigned long now = millis();
+ MotorSensor();
 
-  unsigned long now = millis();
-  // if (now - lastMsg > 2000) {
-  if (value>10) {
+  if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;
-    snprintf (msg, 50, "Balise Ynov, envoie : #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    mqttClient.publish(mqttTopicOut, msg);
+    DHTSensor();
+    LumSensor();
+
+    Serial.print(value);
+    Serial.print(motor);
+
+    if(value == motor){
+
+      Serial.print("good: ");
+
+      if(positionSTR.equals("1")){
+        Serial.print("position 1: ");
+        positionSTR = "2";
+        MotorSensor();
+        motor = motor+10;
+      }else{
+        Serial.print("position 2: ");
+        positionSTR = "1";
+        MotorSensor();
+        motor = motor+30;
+      }
+
+    }
   }
 }
