@@ -18,7 +18,7 @@ router.post('/', function (req, res, next) {
     if (userdata.username == "test" && userdata.password == "test") {
         let token = jwt.sign(userdata, global.config.secretKey, {
             algorithm: global.config.algorithm,
-            expiresIn: '7d'
+            expiresIn: '30d'
         });
 
         res.status(200).json({
