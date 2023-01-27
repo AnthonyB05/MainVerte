@@ -21,11 +21,10 @@ router.post('/', verifyToken, (req, res, next) => {
         degreCelsius: req.body.degreCelsius,
         humiditeExt: req.body.humiditeExt,
         luminosite: req.body.luminosite,
-        longitude: req.body.longitude,
-        latitude: req.body.latitude,
+
 
     })
-    if (uneBaliseData.idBalise && uneBaliseData.degreCelsius && uneBaliseData.humiditeExt && uneBaliseData.luminosite && uneBaliseData.longitude && uneBaliseData.latitude) {
+    if (uneBaliseData.idBalise && uneBaliseData.degreCelsius && uneBaliseData.humiditeExt && uneBaliseData.luminosite) {
         uneBaliseData.save()
             .then(result => {
                 console.log(result);
@@ -40,9 +39,10 @@ router.post('/', verifyToken, (req, res, next) => {
                 });
             })
     }
-    else{
+    else {
         res.status(400).json({
-            error:"bad request"})
+            error: "bad request"
+        })
     }
 
 })
