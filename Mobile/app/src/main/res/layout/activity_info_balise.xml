@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,15 +25,15 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="left">
+                    android:gravity="left"
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imageButtonFavoris"
-                        android:layout_weight="0"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="right"
+                        android:layout_weight="0"
                         android:background="#FFFFFF"
                         android:paddingLeft="5dp"
                         android:paddingTop="5dp"
@@ -43,28 +43,28 @@
 
                 <TextView
                     android:id="@+id/textViewNameBalise"
+                    style="@style/Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="NameBalise"
                     android:layout_margin="16dp"
-                    style="@style/Title"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="NameBalise"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:layout_margin="5dp"
-                    android:text="Température : " />
+                    android:text="Température : "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewInfoTemp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="10°C"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="5dp"
+                    tools:text="10°C" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                     android:layout_margin="5dp"
                     android:text="Humidité :"
                     android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewInfoHumid"
@@ -87,7 +87,7 @@
                     android:layout_margin="5dp"
                     android:text="Luminosité :"
                     android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textViewInfoLum"
@@ -101,12 +101,49 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Moyenne de la température par jour en °C"
+                    android:textStyle="bold" android:textAlignment="center"/>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChartTemp"
                     android:layout_width="match_parent"
-                    android:layout_height="251dp" />
+                    android:layout_height="330dp"
+                    android:layout_margin="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Moyenne de l'humidité par jour en %"
+                    android:textStyle="bold" android:textAlignment="center"/>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChartHumid"
+                    android:layout_width="match_parent"
+                    android:layout_height="330dp"
+                    android:layout_margin="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Moyenne de la luminosité par jour en lux"
+                    android:textStyle="bold" android:textAlignment="center"/>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChartLum"
+                    android:layout_width="match_parent"
+                    android:layout_height="330dp"
+                    android:layout_margin="5dp" />
+
 
             </LinearLayout>
 
@@ -114,8 +151,6 @@
 
 
     </ScrollView>
-
-
 
 
 </LinearLayout>
