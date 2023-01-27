@@ -37,7 +37,9 @@ router.get('/:id', verifyToken, (req, res, next) => {
 router.post('/', verifyToken, (req, res, next) => {
     const uneBalise = new Balise({
         id: req.body.id,
-        nameBalise: req.body.nameBalise
+        nameBalise: req.body.nameBalise,
+        longitude: req.body.longitude,
+        latitude: req.body.latitude
     })
     console.log(req.body)
     if (uneBalise.id && uneBalise.nameBalise) {
@@ -76,7 +78,6 @@ router.patch('/:id', verifyToken, (req, res, next) => {
             longitude: req.body.longitude,
             latitude: req.body.latitude
         };
-        console.log(updateGps.longitude);
         if (typeof (updateGps.longitude) === 'number' && typeof (updateGps.latitude) === 'number') {
 
             Balise.updateOne({ id: req.params.id }, { $set: updateGps }, (err, docs) => {
