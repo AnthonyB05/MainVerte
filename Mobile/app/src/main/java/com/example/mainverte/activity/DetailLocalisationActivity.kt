@@ -88,7 +88,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
         })
     }
 
-    private fun getLastBaliseData(id: Long) {
+/*    private fun getLastBaliseData(id: Long) {
 
         var data = Api.apiService.getLastBaliseDataById(Constant.token, id)
         data.enqueue(object : Callback<OneBaliseData> {
@@ -104,7 +104,7 @@ class DetailLocalisationActivity : AppCompatActivity() {
             }
 
         })
-    }
+    }*/
 
     private fun getCurrentLocation() {
         if (checkPermissions()) {

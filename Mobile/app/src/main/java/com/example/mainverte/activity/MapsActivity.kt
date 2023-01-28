@@ -34,15 +34,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.tabs.TabLayout
-import com.google.gson.Gson
-import com.google.maps.android.clustering.ClusterManager
-import kotlinx.android.synthetic.main.activity_list_balises.*
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.awaitResponse
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {

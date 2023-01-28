@@ -20,16 +20,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.mainverte.R
 import com.example.mainverte.listing.ListBalisesActivity
 import com.example.mainverte.listing.ListBalisesFavActivity
 import com.example.mainverte.listing.ListBalisesParameterActivity
 import com.example.mainverte.listing.ListLocalisationActivity
 import com.example.mainverte.utils.Network
+import com.example.mainverte.workers.MyWork
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         //récupération de la localisation
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation();
+        initWM()
         // gestion des boutons
         buttonMaps.setOnClickListener {
             val intentMaps: Intent = Intent(this@MainActivity, MapsActivity::class.java);
@@ -91,6 +98,14 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@MainActivity, ListLocalisationActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun initWM(){
+        val request = PeriodicWorkRequestBuilder<MyWork>(30, TimeUnit.MINUTES, 15, TimeUnit.MINUTES).build()
+        WorkManager.getInstance(this).enqueue(request)
+        val request2 = OneTimeWorkRequestBuilder<MyWork>().build()
+        WorkManager.getInstance(this).enqueue(request2)
+
     }
 
     private fun getCurrentLocation() {

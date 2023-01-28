@@ -16,7 +16,7 @@ interface ApiService {
     fun getBaliseById(@Header("x-access-token")header: String,@Path("id")id: Long): Call<OneBalise>
 
     @GET("balises-data/{id}/last")
-    fun getLastBaliseDataById(@Header("x-access-token")header: String,@Path("id") id: Long): Call<OneBaliseData>
+    suspend fun getLastBaliseDataById(@Header("x-access-token")header: String,@Path("id") id: Long): Response<OneBaliseData>
 
     @GET("balises-data/{id}")
     fun getBaliseDataById(@Header("x-access-token")header: String,@Path("id") id: Long): Call<ListData>

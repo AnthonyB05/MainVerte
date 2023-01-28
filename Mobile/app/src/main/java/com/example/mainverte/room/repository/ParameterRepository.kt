@@ -14,6 +14,10 @@ class ParameterRepository(private val parameterDao: ParameterDao) {
     // Observed Flow will notify the observer when the data has changed.
     val allParameter: LiveData<List<Parameter>> = parameterDao.getAll()
 
+    fun getParametersWithNotif() : List<Parameter>{
+        return parameterDao.getParametersWithNotif()
+    }
+
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work

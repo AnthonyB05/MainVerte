@@ -9,6 +9,9 @@ interface ParameterDao {
     @Query("SELECT * FROM parameter")
     fun getAll(): LiveData<List<Parameter>>
 
+    @Query("SELECT * FROM parameter WHERE notifTemp LIKE 1 OR notifHumid LIKE 1")
+    fun getParametersWithNotif(): List<Parameter>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(parameter: Parameter)
 

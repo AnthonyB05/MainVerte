@@ -18,6 +18,10 @@ class ParameterViewModel(private val repository: ParameterRepository) : ViewMode
     // - Repository is completely separated from the UI through the ViewModel.
     val allParameters: LiveData<List<Parameter>> = repository.allParameter
 
+    fun getParametersWithNotif() : List<Parameter>{
+        return repository.getParametersWithNotif()
+    }
+
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */

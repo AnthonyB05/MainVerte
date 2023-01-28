@@ -56,9 +56,8 @@ class InfoBaliseActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<ListData>, response: Response<ListData>) {
                     if (response.isSuccessful) {
                         listBaliseData = response.body()!!.balisesData
-                        if (listBaliseData!!.size > 0) {
-                            textViewInfoTemp.text =
-                                listBaliseData!![0].degreCelsius.toString() + "°C"
+                        if (!listBaliseData!!.isNullOrEmpty()) {
+                            textViewInfoTemp.text = listBaliseData!![0].degreCelsius.toString() + "°C"
                             textViewInfoHumid.text = listBaliseData!![0].humiditeExt.toString()
                             textViewInfoLum.text = listBaliseData!![0].luminosite.toString()
                             populateLineChartTemp(listBaliseData!!)
@@ -107,7 +106,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         val listAverageTemp :  ArrayList<ArrayList<String>> = averagePerDayTemp(values)
         val listDate = ArrayList<String>()
         var i = 0
-        if (listAverageTemp.size >0) {
+        if (!listAverageTemp.isNullOrEmpty()) {
             for (item in listAverageTemp) {
                 var value = item[1].toString().toFloat()
                 ourLineChartEntries.add(Entry(i.toFloat(), value))
@@ -167,7 +166,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         val listAverageHumid :  ArrayList<ArrayList<String>> = averagePerDayHumid(values)
         val listDate = ArrayList<String>()
         var i = 0
-        if (listAverageHumid.size >0) {
+        if (!listAverageHumid.isNullOrEmpty()) {
             for (item in listAverageHumid) {
                 var value = item[1].toString().toFloat()
                 ourLineChartEntries.add(Entry(i.toFloat(), value))
@@ -227,7 +226,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         val listAverageLum :  ArrayList<ArrayList<String>> = averagePerDayLum(values)
         val listDate = ArrayList<String>()
         var i = 0
-        if (listAverageLum.size >0) {
+        if (!listAverageLum.isNullOrEmpty()) {
             for (item in listAverageLum) {
                 var value = item[1].toString().toFloat()
                 ourLineChartEntries.add(Entry(i.toFloat(), value))
@@ -289,7 +288,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         var average = 0.00
         var listAveragePerDay = ArrayList<ArrayList<String>>()
         var listDateFaite = ArrayList<String>()
-        if (values != null)
+        if (!values.isNullOrEmpty())
             for (item in values.sortedBy { it.date }) {
                 var tempDate = sdf.format(item.date)
                 var saveDate = tempDate
@@ -326,7 +325,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         var average = 0.00
         var listAveragePerDay = ArrayList<ArrayList<String>>()
         var listDateFaite = ArrayList<String>()
-        if (values != null)
+        if (!values.isNullOrEmpty())
             for (item in values.sortedBy { it.date }) {
                 var tempDate = sdf.format(item.date)
                 var saveDate = tempDate
@@ -363,7 +362,7 @@ class InfoBaliseActivity : AppCompatActivity() {
         var average = 0.00
         var listAveragePerDay = ArrayList<ArrayList<String>>()
         var listDateFaite = ArrayList<String>()
-        if (values != null)
+        if (!values.isNullOrEmpty())
             for (item in values.sortedBy { it.date }) {
                 var tempDate = sdf.format(item.date)
                 var saveDate = tempDate
