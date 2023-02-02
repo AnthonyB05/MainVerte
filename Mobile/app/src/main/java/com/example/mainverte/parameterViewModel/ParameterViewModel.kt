@@ -37,6 +37,10 @@ class ParameterViewModel(private val repository: ParameterRepository) : ViewMode
         return repository.getParameterByIdBalise(idBalise)
     }
 
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
+
 }
 class ParameterViewModelFactory(private val repository: ParameterRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

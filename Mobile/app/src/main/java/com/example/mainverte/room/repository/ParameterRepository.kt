@@ -18,6 +18,10 @@ class ParameterRepository(private val parameterDao: ParameterDao) {
         return parameterDao.getParametersWithNotif()
     }
 
+    suspend fun deleteAll(){
+        parameterDao.deleteAll()
+    }
+
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
