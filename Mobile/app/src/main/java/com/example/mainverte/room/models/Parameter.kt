@@ -6,13 +6,14 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "parameter", indices = [Index(value = ["nameBalise"], unique = true)])
+@Entity(tableName = "parameter", indices = [Index(value = ["idBalise"], unique = true)])
 
 data class Parameter(
+    @PrimaryKey
     @ColumnInfo(name = "idBalise")
     var idBalise: Long,
     @ColumnInfo(name = "nameBalise")
-    var nameBalise: String,
+    val nameBalise: String,
     @ColumnInfo(name = "tempMin")
     val tempMin: Int,
     @ColumnInfo(name = "tempMax")
@@ -25,9 +26,7 @@ data class Parameter(
     val notifTemp: Boolean,
     @ColumnInfo(name = "notifHumid")
     val notifHumid: Boolean,
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    val id: Long = 0
+
 /*    @PrimaryKey(autoGenerate = true)
     @NonNull
     val id: Long = 0*/

@@ -29,10 +29,6 @@ class ParameterViewModel(private val repository: ParameterRepository) : ViewMode
         repository.insert(parameter)
     }
 
-    fun getParameterByNameBalise(baliseName: String) : LiveData<List<Parameter>>{
-        return repository.getParameterByNameBalise(baliseName)
-    }
-
     fun getParameterByIdBalise(idBalise: Long) : LiveData<List<Parameter>>{
         return repository.getParameterByIdBalise(idBalise)
     }

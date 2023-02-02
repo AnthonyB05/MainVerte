@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = [BaliseFav::class, Parameter::class], version = 1)
+@Database(entities = [BaliseFav::class, Parameter::class], version = 2)
 public abstract class MainVerteDataBase : RoomDatabase() {
 
     abstract fun baliseDao(): BaliseFavDao

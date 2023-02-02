@@ -18,9 +18,6 @@ interface ParameterDao {
     @Query("DELETE FROM parameter")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM parameter WHERE nameBalise LIKE :nameBalise")
-    fun getParameterByNameBalise(nameBalise: String) : LiveData<List<Parameter>>
-
     @Query("SELECT * FROM parameter WHERE idBalise LIKE :idBalise")
     fun getParameterByIdBalise(idBalise: Long) : LiveData<List<Parameter>>
 }
